@@ -1,21 +1,25 @@
 :root {
-  --bg: #0a0804;
-  --bg-soft: #15110a;
-  --bg-card: #1a1408;
-  --surface: rgba(196, 154, 44, 0.07);
-  --surface-strong: rgba(196, 154, 44, 0.13);
-  --accent: #c49a2c;
-  --accent-2: #e8c96a;
-  --accent-dim: rgba(196, 154, 44, 0.35);
-  --text: #f5efe0;
-  --muted: #a89070;
-  --muted-2: #6b5a40;
-  --border: rgba(196, 154, 44, 0.18);
-  --border-strong: rgba(196, 154, 44, 0.38);
+  --bg: #070603;
+  --bg-soft: #110e07;
+  --bg-card: #131008;
+  --surface: rgba(212, 168, 50, 0.08);
+  --surface-strong: rgba(212, 168, 50, 0.16);
+  --accent: #d4a832;
+  --accent-2: #f0d470;
+  --accent-dim: rgba(212, 168, 50, 0.4);
+  --accent-glow: rgba(212, 168, 50, 0.22);
+  --text: #faf4e6;
+  --muted: #b89c72;
+  --muted-2: #6b5a3a;
+  --border: rgba(212, 168, 50, 0.2);
+  --border-strong: rgba(212, 168, 50, 0.45);
   --font-heading: 'Syne', sans-serif;
   --font-body: 'Inter', sans-serif;
   --radius: 1.2rem;
   --radius-sm: 0.75rem;
+  --glow-sm: 0 0 24px rgba(212, 168, 50, 0.18);
+  --glow-md: 0 0 48px rgba(212, 168, 50, 0.22);
+  --glow-lg: 0 0 80px rgba(212, 168, 50, 0.28);
 }
 
 *, *::before, *::after {
@@ -30,7 +34,7 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--bg);
+  background-color: #070603;
   color: var(--text);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
@@ -110,11 +114,13 @@ h1, h2, h3, h4, h5 {
 
 .btn-primary {
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  color: #0a0804;
+  color: #070401;
+  font-weight: 700;
 }
 
 .btn-primary:hover {
-  box-shadow: 0 8px 32px rgba(196, 154, 44, 0.4);
+  box-shadow: 0 8px 40px rgba(212, 168, 50, 0.55);
+  filter: brightness(1.08);
 }
 
 .btn-secondary {

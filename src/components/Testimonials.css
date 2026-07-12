@@ -1,5 +1,7 @@
 .testimonials-section {
-  background: var(--bg);
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(212, 168, 50, 0.08) 0%, transparent 60%),
+    var(--bg);
   border-top: 1px solid var(--border);
   overflow: hidden;
 }

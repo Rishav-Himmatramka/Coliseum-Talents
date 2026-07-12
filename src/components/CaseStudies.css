@@ -1,5 +1,7 @@
 .cases-section {
-  background: var(--bg-soft);
+  background:
+    radial-gradient(ellipse 50% 50% at 0% 100%, rgba(212, 168, 50, 0.09) 0%, transparent 60%),
+    var(--bg-soft);
   border-top: 1px solid var(--border);
 }
 

@@ -42,20 +42,26 @@
 }
 
 .talent-card {
-  background: var(--bg-card);
+  background: linear-gradient(145deg, #171208, #0f0c06);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  transition: border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+  transition: border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease, opacity 220ms ease;
+  animation: cardIn 300ms ease both;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .talent-card:hover {
   border-color: var(--border-strong);
-  transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(196, 154, 44, 0.12);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 56px rgba(0,0,0,0.5), 0 0 32px rgba(212, 168, 50, 0.14);
 }
 
 .talent-avatar {

@@ -45,8 +45,8 @@ export default function TalentRoster() {
         </div>
 
         <div className="roster-grid">
-          {filtered.map((talent, i) => (
-            <article key={talent.id} className={`talent-card fade-up delay-${(i % 4) + 1}`}>
+          {filtered.map((talent) => (
+            <article key={talent.id} className="talent-card">
               <div className="talent-avatar" style={{ background: `radial-gradient(circle at 40% 35%, ${talent.color}88, ${talent.color}33)` }}>
                 <span>{talent.initials}</span>
               </div>

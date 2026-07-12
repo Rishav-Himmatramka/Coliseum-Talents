@@ -1,0 +1,83 @@
+.approach-section {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+
+.approach-top {
+  max-width: 600px;
+  margin-bottom: 3.5rem;
+}
+
+.approach-top h2 {
+  font-size: clamp(1.9rem, 3vw, 2.8rem);
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.step {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: background 200ms ease;
+}
+
+.step:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.step:hover {
+  background: rgba(196, 154, 44, 0.03);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: var(--radius-sm);
+}
+
+.step-num {
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(180deg, var(--accent), rgba(196, 154, 44, 0.25));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  flex-shrink: 0;
+  width: 80px;
+}
+
+.step-content {
+  padding-top: 0.5rem;
+}
+
+.step-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.step-content p {
+  color: var(--muted);
+  font-size: 0.97rem;
+  line-height: 1.75;
+  max-width: 640px;
+}
+
+@media (max-width: 660px) {
+  .step {
+    gap: 1.5rem;
+  }
+
+  .step-num {
+    font-size: 2.5rem;
+    width: 54px;
+  }
+
+  .step-content h3 {
+    font-size: 1.2rem;
+  }
+}

@@ -219,10 +219,10 @@ h2 {
   padding: 1.6rem 1.8rem;
   border-radius: 1.4rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(10, 15, 28, 0.96);
-  backdrop-filter: blur(18px);
-  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.22);
-  transition: transform 220ms ease, border-color 220ms ease, opacity 220ms ease, box-shadow 220ms ease;
+  background: rgba(8, 12, 22, 0.98);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.24);
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
   min-height: 260px;
   z-index: 1;
   overflow: hidden;
@@ -232,33 +232,29 @@ h2 {
   top: 8.2rem;
   margin-top: 1.5rem;
   z-index: 2;
-  opacity: 0.84;
 }
 
 .expertise-card:nth-child(3) {
   top: 11.4rem;
   margin-top: 1.9rem;
   z-index: 3;
-  opacity: 0.72;
 }
 
 .expertise-card:nth-child(4) {
   top: 14.6rem;
   margin-top: 2.3rem;
   z-index: 4;
-  opacity: 0.62;
 }
 
 .expertise-card.is-active {
   border-color: rgba(68, 213, 255, 0.65);
   transform: translateY(-4px);
   box-shadow: 0 34px 80px rgba(0, 0, 0, 0.28);
-  opacity: 1;
   z-index: 5;
 }
 
 .expertise-card:not(.is-active) {
-  filter: saturate(0.92);
+  filter: none;
 }
 
 .expertise-card span {

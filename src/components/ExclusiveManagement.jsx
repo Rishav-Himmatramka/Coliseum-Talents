@@ -26,14 +26,15 @@ export default function ExclusiveManagement() {
   return (
     <section className="section exclusive-section" id="exclusive" ref={ref}>
       <div className="container">
-        <div className="section-heading fade-up" style={{ textAlign: 'center', margin: '0 auto 3rem' }}>
-          <div className="gold-line" style={{ margin: '0 auto 1.5rem' }} />
+        <div className="section-heading fade-up">
+          <div className="gold-line" />
           <p className="eyebrow">Exclusive management</p>
           <h2>Icons we are proud to exclusively represent.</h2>
-          <p>Coliseum Talents is the exclusive management partner for two of India's most inspiring personalities.</p>
+          <p>Coliseum Talents is the exclusive management partner for some of India's most inspiring personalities.</p>
         </div>
 
-        <div className="exclusive-grid">
+        <div className="exclusive-scroll-outer">
+          <div className="exclusive-scroll-track">
           {EXCLUSIVES.map((person, i) => (
             <article key={person.name} className={`exclusive-card fade-up delay-${i + 1}`}>
               <div className="exclusive-avatar">
@@ -51,8 +52,7 @@ export default function ExclusiveManagement() {
                 <a href="#contact" className="btn btn-primary exclusive-cta">Book for Your Event</a>
               </div>
             </article>
-          ))}
-        </div>
+          ))}          </div>        </div>
       </div>
     </section>
   )

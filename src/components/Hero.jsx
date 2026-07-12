@@ -24,39 +24,39 @@ export default function Hero() {
 
       <div className="container hero-inner">
         <div className="hero-copy">
-          <p className="eyebrow">Boutique talent management &amp; consulting</p>
+          <p className="eyebrow">Boutique talent management &amp; consulting · India</p>
           <h1>
-            Premium{' '}
+            Connecting Brands with India's Most Inspiring{' '}
             <span className={`keyword${animating ? ' exit' : ' enter'}`}>
               {KEYWORDS[index]}
-            </span>
-            <br />for extraordinary events.
+            </span>.
           </h1>
           <p className="hero-lead">
-            We curate unforgettable speakers, celebrities, performers, artists and entertainers
-            for corporate events, leadership summits, award nights and private celebrations.
+            Coliseum Talents is a boutique talent management and consulting company that curates
+            exceptional speakers, celebrities, performers, artists, and entertainers for corporate
+            events, conferences, leadership summits, awards nights, and private celebrations.
           </p>
           <div className="hero-actions">
-            <a href="#contact" className="btn btn-primary">Book a Consultation</a>
-            <a href="#roster" className="btn btn-secondary">Discover Talent</a>
+            <a href="#roster" className="btn btn-primary">Explore Talent</a>
+            <a href="#contact" className="btn btn-secondary">Book an Artist</a>
           </div>
         </div>
 
         <div className="hero-card">
           <p className="eyebrow">Why clients choose us</p>
-          <h3>Tailored talent, elevated impact.</h3>
+          <h3>Trusted by India's leading brands.</h3>
           <ul>
             <li>
               <span className="check">✦</span>
-              Handpicked performers aligned to your audience
+              Exclusive management of Lt. Gen. Satish Dua &amp; Viren Rasquinha
             </li>
             <li>
               <span className="check">✦</span>
-              Strategic event consultation from brief to delivery
+              Pan-India execution for corporate &amp; private events
             </li>
             <li>
               <span className="check">✦</span>
-              Seamless logistics and premium guest experiences
+              End-to-end management from selection to stage
             </li>
           </ul>
         </div>
@@ -65,23 +65,23 @@ export default function Hero() {
       <div className="hero-stats-strip">
         <div className="container stats-row">
           <div className="stat">
-            <strong>120+</strong>
-            <span>Curated talent partnerships</span>
-          </div>
-          <div className="stat-divider" />
-          <div className="stat">
-            <strong>25+</strong>
-            <span>Industries served</span>
+            <strong>10+</strong>
+            <span>Years of experience</span>
           </div>
           <div className="stat-divider" />
           <div className="stat">
             <strong>500+</strong>
-            <span>Events delivered worldwide</span>
+            <span>Events delivered across India</span>
+          </div>
+          <div className="stat-divider" />
+          <div className="stat">
+            <strong>50+</strong>
+            <span>Leading brand clients</span>
           </div>
           <div className="stat-divider" />
           <div className="stat">
             <strong>100%</strong>
-            <span>Bespoke event curation</span>
+            <span>End-to-end managed</span>
           </div>
         </div>
       </div>

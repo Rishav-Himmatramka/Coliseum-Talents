@@ -23,6 +23,24 @@
   filter: brightness(0.9);
 }
 
+.footer-contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.4rem;
+}
+
+.footer-contact-links a {
+  font-size: 0.82rem;
+  color: var(--accent-2);
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.footer-contact-links a:hover {
+  color: var(--accent);
+}
+
 .footer-brand p {
   font-size: 0.85rem;
   color: var(--muted);

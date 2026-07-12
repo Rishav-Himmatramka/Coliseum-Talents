@@ -15,8 +15,9 @@ export default function Contact() {
 
   const handleSubmit = e => {
     e.preventDefault()
-    // Placeholder — replace with real form handler or API
     setSubmitted(true)
+    // To wire up: POST to your backend or use a service like Formspree
+    // e.g. fetch('https://formspree.io/f/YOUR_ID', { method: 'POST', body: JSON.stringify(form) })
   }
 
   return (
@@ -25,10 +26,13 @@ export default function Contact() {
         <div className="contact-copy fade-up">
           <div className="gold-line" />
           <p className="eyebrow">Let's create something extraordinary</p>
-          <h2>Bring a remarkable talent experience to your next event.</h2>
-          <p>Tell us about your event and we'll respond within one business day with a tailored recommendation.</p>
-          <a href="mailto:hello@coliseumtalents.com" className="contact-email">
-            hello@coliseumtalents.com
+          <h2>Book talent for your next event in India.</h2>
+          <p>Tell us about your event and we'll respond with a tailored talent recommendation. Based in India, delivering pan-India.</p>
+          <a href="mailto:info@coliseumtalents.in" className="contact-email">
+            info@coliseumtalents.in
+          </a>
+          <a href="https://www.instagram.com/coliseum_talents" target="_blank" rel="noopener noreferrer" className="contact-social">
+            <span>📷</span> @coliseum_talents
           </a>
         </div>
 

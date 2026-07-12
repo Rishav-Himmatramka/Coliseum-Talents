@@ -2,17 +2,21 @@ import { useState, useRef } from 'react'
 import useFadeIn from '../hooks/useFadeIn'
 import './TalentRoster.css'
 
-const CATEGORIES = ['All', 'Speakers', 'Celebrities', 'Performers', 'Artists']
+const CATEGORIES = ['All', 'Speakers', 'Sports Icons', 'Celebrities', 'Entertainment', 'Defence']
 
 const TALENT = [
-  { id: 1, name: 'Alexandra Reid', title: 'Keynote Speaker', category: 'Speakers', initials: 'AR', color: '#8B6914' },
-  { id: 2, name: 'Marcus Chen', title: 'Innovation Strategist', category: 'Speakers', initials: 'MC', color: '#7A5C10' },
-  { id: 3, name: 'Sophia Laurent', title: 'Award-Winning Host', category: 'Celebrities', initials: 'SL', color: '#9B7520' },
-  { id: 4, name: 'James Okafor', title: 'TV Presenter & Author', category: 'Celebrities', initials: 'JO', color: '#6B4F0E' },
-  { id: 5, name: 'The Velvet Collective', title: 'Jazz & Soul Ensemble', category: 'Performers', initials: 'VC', color: '#8A6818' },
-  { id: 6, name: 'DJ Meridian', title: 'Live Electronic Artist', category: 'Performers', initials: 'DM', color: '#7C5E14' },
-  { id: 7, name: 'Amara Visual Art', title: 'Live Painting Experience', category: 'Artists', initials: 'AV', color: '#956D1A' },
-  { id: 8, name: 'Nova Dance Company', title: 'Contemporary Dance', category: 'Artists', initials: 'ND', color: '#704D0C' },
+  { id: 1, name: 'Motivational Speakers', title: 'Leadership, entrepreneurship & inspiration', category: 'Speakers', initials: 'MS', color: '#8B6914' },
+  { id: 2, name: 'Business Leaders', title: 'Corporate keynotes & strategy forums', category: 'Speakers', initials: 'BL', color: '#7A5C10' },
+  { id: 3, name: 'Corporate Trainers', title: 'Workshops, L&D and skill-building sessions', category: 'Speakers', initials: 'CT', color: '#6B4F0E' },
+  { id: 4, name: 'Olympians & Sports Icons', title: 'Athletes and sports personalities', category: 'Sports Icons', initials: 'SI', color: '#9B7520' },
+  { id: 5, name: 'Bollywood Celebrities', title: 'Film stars for events & brand campaigns', category: 'Celebrities', initials: 'BC', color: '#8A6818' },
+  { id: 6, name: 'Hosts & Anchors', title: 'Professional event anchoring & hosting', category: 'Entertainment', initials: 'HA', color: '#7C5E14' },
+  { id: 7, name: 'Stand-up Comedians', title: 'Corporate comedy nights & award shows', category: 'Entertainment', initials: 'SC', color: '#956D1A' },
+  { id: 8, name: 'Live Bands & DJs', title: 'Music performances and dance floors', category: 'Entertainment', initials: 'LB', color: '#704D0C' },
+  { id: 9, name: 'Illusionists & Magicians', title: 'Mind-bending stage performances', category: 'Entertainment', initials: 'IM', color: '#825F12' },
+  { id: 10, name: 'Classical & Contemporary', title: 'Cultural performances for galas & launches', category: 'Entertainment', initials: 'CP', color: '#6E5010' },
+  { id: 11, name: 'Defence Veterans', title: 'Generals, Commandos & military leaders', category: 'Defence', initials: 'DV', color: '#7B6218' },
+  { id: 12, name: 'Influencers & Creators', title: 'Digital personalities for brand activations', category: 'Celebrities', initials: 'IC', color: '#8C7020' },
 ]
 
 export default function TalentRoster() {
@@ -28,8 +32,8 @@ export default function TalentRoster() {
         <div className="section-heading fade-up">
           <div className="gold-line" />
           <p className="eyebrow">Our talent roster</p>
-          <h2>Exceptional talent, handpicked for every occasion.</h2>
-          <p>Each talent partner is individually vetted and personally selected to ensure the highest standard of performance and professionalism.</p>
+          <h2>India's most inspiring talent, across every category.</h2>
+          <p>From defence veterans and Olympians to Bollywood celebrities and live entertainers — curated for corporate events, conferences, and celebrations across India.</p>
         </div>
 
         <div className="filter-tabs fade-up delay-1">

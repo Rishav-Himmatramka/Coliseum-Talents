@@ -12,31 +12,32 @@ export default function About() {
         <div className="about-left fade-up">
           <div className="gold-line" />
           <p className="eyebrow">About Coliseum Talents</p>
-          <h2>We shape moments that feel elevated, intentional and unforgettable.</h2>
+          <h2>Every event deserves the right voice, the right performance, and the right experience.</h2>
         </div>
         <div className="about-right">
           <p className="fade-up delay-1">
-            Coliseum Talents exists for brands and hosts who want more than a booking. We bring a
-            highly selective approach to talent curation, ensuring every choice speaks to the
-            energy, story and ambition of the occasion.
+            Founded by <strong>Anuj Agrawal</strong>, Coliseum Talents specialises in artist management,
+            celebrity bookings, motivational speakers, sports icons, entertainers, and event consulting.
+            With over a decade of experience in the entertainment and live events industry, the company
+            has successfully delivered talent solutions for leading brands across India.
           </p>
           <p className="fade-up delay-2">
-            From intimate private celebrations to global corporate summits, we operate at the
-            intersection of culture, entertainment and strategy — crafting experiences that leave
-            a lasting impression on every guest in the room.
+            Whether it's a keynote speaker who inspires, a celebrity who elevates a campaign, or
+            entertainment that captivates audiences — Coliseum Talents manages every engagement
+            professionally, from talent selection and negotiations to logistics and execution.
           </p>
           <div className="about-pillars fade-up delay-3">
             <div className="pillar">
-              <strong>Selective</strong>
-              <span>We work with talent we believe in — no compromises on quality.</span>
+              <strong>Curated</strong>
+              <span>Handpicked talent matched to your audience, brief and budget.</span>
             </div>
             <div className="pillar">
-              <strong>Strategic</strong>
-              <span>Every talent decision serves the story you're trying to tell.</span>
+              <strong>Professional</strong>
+              <span>Transparent commercials, professional contracts, no surprises.</span>
             </div>
             <div className="pillar">
-              <strong>Seamless</strong>
-              <span>You focus on the room. We handle everything else.</span>
+              <strong>End-to-End</strong>
+              <span>Selection, negotiation, logistics and execution — all handled.</span>
             </div>
           </div>
         </div>

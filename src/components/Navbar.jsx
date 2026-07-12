@@ -13,9 +13,10 @@ export default function Navbar() {
 
   const links = [
     { href: '#about', label: 'About' },
-    { href: '#roster', label: 'Talent Roster' },
-    { href: '#expertise', label: 'Expertise' },
-    { href: '#events', label: 'Events' },
+    { href: '#services', label: 'Services' },
+    { href: '#exclusive', label: 'Exclusive Talent' },
+    { href: '#roster', label: 'Talent' },
+    { href: '#clients', label: 'Clients' },
     { href: '#team', label: 'Team' },
   ]
 

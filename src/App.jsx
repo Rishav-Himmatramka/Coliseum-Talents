@@ -1,8 +1,10 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
-import TalentRoster from './components/TalentRoster'
 import Expertise from './components/Expertise'
+import ExclusiveManagement from './components/ExclusiveManagement'
+import TalentRoster from './components/TalentRoster'
+import Clients from './components/Clients'
 import CaseStudies from './components/CaseStudies'
 import Testimonials from './components/Testimonials'
 import Team from './components/Team'
@@ -16,8 +18,10 @@ export default function App() {
       <Navbar />
       <Hero />
       <About />
-      <TalentRoster />
       <Expertise />
+      <ExclusiveManagement />
+      <TalentRoster />
+      <Clients />
       <CaseStudies />
       <Testimonials />
       <Team />

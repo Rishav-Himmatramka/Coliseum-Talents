@@ -5,27 +5,39 @@ import './Expertise.css'
 const CARDS = [
   {
     num: '01',
-    title: 'Speakers & Thought Leaders',
-    desc: 'High-caliber voices for keynote stages, strategy forums and executive gatherings.',
-    tags: ['Leadership & Innovation', 'Motivational Keynotes', 'Global Thought Leadership'],
+    title: 'Artist Management',
+    desc: 'Strategic career management for speakers, celebrities, athletes, and performers — from brand building to event representation.',
+    tags: ['Speaker Representation', 'Celebrity Management', 'Athlete Partnerships'],
   },
   {
     num: '02',
-    title: 'Celebrity Hosts & Public Figures',
-    desc: 'Iconic personalities that anchor events with glamour, credibility and cultural relevance.',
-    tags: ['Red Carpet & Gala Hosting', 'Brand Storytelling', 'Prestige Engagement'],
+    title: 'Celebrity & Speaker Booking',
+    desc: 'End-to-end celebrity procurement for brand campaigns, product launches, conferences, and private events across India.',
+    tags: ['Brand Campaigns', 'Product Launches', 'Conferences', 'Private Events'],
   },
   {
     num: '03',
-    title: 'Performers & Live Acts',
-    desc: 'Dynamic entertainment that turns a room into an experience from the first beat onward.',
-    tags: ['Musical Performances', 'Stage Acts', 'High-Energy Programming'],
+    title: 'Corporate Entertainment',
+    desc: 'Live bands, comedians, illusionists, anchors, DJs, cultural acts and bespoke entertainment for corporate gatherings.',
+    tags: ['Live Bands', 'Stand-up Comedy', 'Illusionists', 'Anchors & DJs'],
   },
   {
     num: '04',
-    title: 'Artists & Curated Entertainment',
-    desc: 'Distinctive talent for intimate gatherings, award nights and private celebrations.',
-    tags: ['Luxury Private Events', 'Custom Concepts', 'Tailored Experiences'],
+    title: 'Event Consulting',
+    desc: 'Talent recommendations, budgeting, negotiations, production coordination and full artist logistics management.',
+    tags: ['Talent Curation', 'Budget Planning', 'Production Coordination', 'Logistics'],
+  },
+  {
+    num: '05',
+    title: 'Motivational Speakers',
+    desc: 'Leadership, business, entrepreneurship, defence, sports, education and sustainability speakers for every brief.',
+    tags: ['Leadership', 'Defence Veterans', 'Sports Icons', 'Entrepreneurship'],
+  },
+  {
+    num: '06',
+    title: 'Brand Collaborations',
+    desc: 'Connecting brands with personalities for endorsements, campaigns, digital content and experiential marketing.',
+    tags: ['Endorsements', 'Digital Content', 'Experiential Marketing', 'Campaigns'],
   },
 ]
 
@@ -34,13 +46,13 @@ export default function Expertise() {
   useFadeIn(ref)
 
   return (
-    <section className="section expertise-section" id="expertise" ref={ref}>
+      <section className="section expertise-section" id="services" ref={ref}>
       <div className="container">
         <div className="section-heading fade-up">
           <div className="gold-line" />
           <p className="eyebrow">Our expertise</p>
-          <h2>Signature talent experiences, crafted for every brief.</h2>
-          <p>Each category is thoughtfully curated to create a distinct atmosphere, whether the brief is polished corporate, cinematic gala or intimate celebration.</p>
+          <h2>Six ways we deliver exceptional talent experiences.</h2>
+          <p>From artist management and celebrity bookings to corporate entertainment and event consulting — tailored to India's leading brands.</p>
         </div>
 
         <div className="expertise-grid">

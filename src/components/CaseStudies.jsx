@@ -4,27 +4,27 @@ import './CaseStudies.css'
 
 const CASES = [
   {
-    tag: 'Global Tech Summit',
-    title: 'A 2,000-person leadership summit transformed by world-class keynote talent.',
-    industry: 'Technology',
-    type: 'Keynote Speaker',
-    outcome: '98% attendee satisfaction',
+    tag: 'Banking & Financial Services',
+    title: 'Delivered keynote speakers and celebrity hosts for leadership summits across Standard Chartered, ICICI Lombard, and ICICI Prudential.',
+    industry: 'Banking & Insurance',
+    type: 'Keynote Speakers + Celebrity Hosts',
+    outcome: 'Pan-India execution across multiple cities',
     num: '01',
   },
   {
-    tag: 'Luxury Gala Evening',
-    title: 'An award night elevated with celebrity hosting and bespoke live performance.',
-    industry: 'Luxury & Finance',
-    type: 'Celebrity Host + Live Act',
-    outcome: '4× standing ovation moments',
+    tag: 'Insurance & Investment',
+    title: 'Curated motivational speakers and entertainers for annual conferences and employee engagement events for Bajaj Finance, Bajaj Allianz, and Tata AIA.',
+    industry: 'Insurance & Finance',
+    type: 'Motivational Speakers + Corporate Entertainment',
+    outcome: 'Consistently re-engaged year on year',
     num: '02',
   },
   {
-    tag: 'Private Brand Launch',
-    title: 'An intimate product launch made iconic by a curated artist-in-residence experience.',
-    industry: 'Fashion & Lifestyle',
-    type: 'Curated Artist',
-    outcome: 'Covered in 12 media outlets',
+    tag: 'Emerging Insurance',
+    title: 'Talent curation and end-to-end event consulting for Digit Insurance\'s large-format corporate events and brand activations.',
+    industry: 'InsurTech',
+    type: 'Event Consulting + Talent Procurement',
+    outcome: 'Seamless delivery from brief to curtain call',
     num: '03',
   },
 ]
@@ -39,8 +39,8 @@ export default function CaseStudies() {
         <div className="section-heading fade-up">
           <div className="gold-line" />
           <p className="eyebrow">Past events</p>
-          <h2>Moments we've helped make extraordinary.</h2>
-          <p>A selection of events where our talent curation made a measurable difference.</p>
+          <h2>Trusted by India's leading brands.</h2>
+          <p>A selection of the companies we've delivered talent solutions for across banking, insurance, and financial services.</p>
         </div>
 
         <div className="cases-list">

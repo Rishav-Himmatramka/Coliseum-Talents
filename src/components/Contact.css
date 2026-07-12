@@ -33,14 +33,30 @@
   font-size: 0.95rem;
   color: var(--accent-2);
   text-decoration: none;
-  border-bottom: 1px solid rgba(232, 201, 106, 0.35);
+  border-bottom: 1px solid rgba(240, 212, 112, 0.35);
   padding-bottom: 2px;
   transition: color 180ms ease, border-color 180ms ease;
+  margin-bottom: 0.75rem;
 }
 
 .contact-email:hover {
   color: var(--accent);
   border-color: var(--accent);
+}
+
+.contact-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.contact-social:hover {
+  color: var(--accent-2);
 }
 
 /* ── Form ── */

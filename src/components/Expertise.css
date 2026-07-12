@@ -5,7 +5,7 @@
 
 .expertise-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.2rem;
 }
 
@@ -96,6 +96,12 @@
   background: var(--surface);
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+@media (max-width: 1000px) {
+  .expertise-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 760px) {

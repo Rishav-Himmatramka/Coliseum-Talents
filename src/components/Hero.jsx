@@ -1,7 +1,13 @@
 import { useState, useEffect } from 'react'
 import './Hero.css'
 
-const KEYWORDS = ['Speakers', 'Celebrities', 'Performers', 'Artists', 'Entertainers']
+const SLIDES = [
+  { adjective: 'Inspiring',      noun: 'Speakers' },
+  { adjective: 'Iconic',         noun: 'Celebrities' },
+  { adjective: 'Electrifying',   noun: 'Performers' },
+  { adjective: 'Captivating',    noun: 'Artists' },
+  { adjective: 'Unforgettable',  noun: 'Entertainers' },
+]
 
 export default function Hero() {
   const [index, setIndex] = useState(0)
@@ -11,7 +17,7 @@ export default function Hero() {
     const interval = setInterval(() => {
       setAnimating(true)
       setTimeout(() => {
-        setIndex(i => (i + 1) % KEYWORDS.length)
+        setIndex(i => (i + 1) % SLIDES.length)
         setAnimating(false)
       }, 350)
     }, 2200)
@@ -26,9 +32,12 @@ export default function Hero() {
         <div className="hero-copy">
           <p className="eyebrow">Boutique talent management &amp; consulting · India</p>
           <h1>
-            Connecting Brands with India's Most Inspiring{' '}
+            Connecting Brands with India's Most{' '}
             <span className={`keyword${animating ? ' exit' : ' enter'}`}>
-              {KEYWORDS[index]}
+              {SLIDES[index].adjective}
+            </span>{' '}
+            <span className={`keyword keyword-noun${animating ? ' exit' : ' enter'}`}>
+              {SLIDES[index].noun}
             </span>.
           </h1>
           <p className="hero-lead">

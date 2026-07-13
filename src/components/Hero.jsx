@@ -1,24 +1,98 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './Hero.css'
 
 export default function Hero() {
   const [visible, setVisible] = useState(false)
+  const orbRef = useRef()
+  const heroRef = useRef()
+  const rafRef = useRef()
+  const posRef = useRef({ x: 0, y: 0, tx: 0, ty: 0 })
 
   useEffect(() => {
     const t = setTimeout(() => setVisible(true), 100)
     return () => clearTimeout(t)
   }, [])
 
+  useEffect(() => {
+    const hero = heroRef.current
+    if (!hero) return
+
+    const onMove = (e) => {
+      const rect = hero.getBoundingClientRect()
+      posRef.current.tx = ((e.clientX - rect.left) / rect.width - 0.5) * 2
+      posRef.current.ty = ((e.clientY - rect.top) / rect.height - 0.5) * 2
+    }
+
+    const animate = () => {
+      const p = posRef.current
+      p.x += (p.tx - p.x) * 0.055
+      p.y += (p.ty - p.y) * 0.055
+      if (orbRef.current) {
+        const dx = p.x * 72
+        const dy = p.y * 48
+        orbRef.current.style.transform = `translate(${dx}px, ${dy}px)`
+      }
+      rafRef.current = requestAnimationFrame(animate)
+    }
+
+    hero.addEventListener('mousemove', onMove)
+    rafRef.current = requestAnimationFrame(animate)
+    return () => {
+      hero.removeEventListener('mousemove', onMove)
+      cancelAnimationFrame(rafRef.current)
+    }
+  }, [])
+
   return (
-    <section className="hero" id="top">
+    <section className="hero" id="top" ref={heroRef}>
       <div className="hero-bg" />
 
       <div className={`hero-center${visible ? ' visible' : ''}`}>
-        <div className="hero-logo-wrap">
-          <img src="/logo.png" alt="Coliseum Talents" className="hero-logo" />
+
+        {/* Styled wordmark */}
+        <div className="hero-wordmark">
+
+          {/* Top row: COLISEUM with floating orb */}
+          <div className="wm-row-top">
+            <span className="wm-text wm-coliseum">COLISEUM</span>
+            <div className="wm-orb" ref={orbRef}>
+              <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="80" cy="80" r="72" stroke="url(#g1)" strokeWidth="3.5"/>
+                <circle cx="80" cy="80" r="54" stroke="url(#g2)" strokeWidth="1.5" strokeDasharray="8 5" opacity="0.7"/>
+                <circle cx="80" cy="80" r="32" fill="url(#gr)" />
+                <circle cx="80" cy="80" r="18" fill="url(#g3)" opacity="0.5"/>
+                <defs>
+                  <linearGradient id="g1" x1="0" y1="0" x2="160" y2="160" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#f0d470"/>
+                    <stop offset="100%" stopColor="#a07820"/>
+                  </linearGradient>
+                  <linearGradient id="g2" x1="160" y1="0" x2="0" y2="160" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#f0d470" stopOpacity="0.9"/>
+                    <stop offset="100%" stopColor="#d4a832" stopOpacity="0.3"/>
+                  </linearGradient>
+                  <radialGradient id="gr" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor="#f0d470" stopOpacity="0.25"/>
+                    <stop offset="100%" stopColor="#c49a2c" stopOpacity="0"/>
+                  </radialGradient>
+                  <radialGradient id="g3" cx="40%" cy="35%" r="50%">
+                    <stop offset="0%" stopColor="#fff8e0" stopOpacity="0.7"/>
+                    <stop offset="100%" stopColor="#d4a832" stopOpacity="0"/>
+                  </radialGradient>
+                </defs>
+              </svg>
+            </div>
+          </div>
+
+          {/* Divider line */}
+          <div className="wm-divider" />
+
+          {/* Bottom row: TALENTS */}
+          <div className="wm-row-bottom">
+            <span className="wm-text wm-talents">TALENTS</span>
+          </div>
         </div>
-        <h1 className="hero-brand">Coliseum Talents</h1>
-        <p className="hero-tagline">Boutique Talent Management &amp; Consulting · India</p>
+
+        <p className="hero-tagline">Boutique Talent Management &amp; Consulting · India</p>
         <div className="hero-ctas">
           <a href="#about" className="btn btn-primary">Explore</a>
           <a href="#contact" className="btn btn-secondary">Book an Artist</a>

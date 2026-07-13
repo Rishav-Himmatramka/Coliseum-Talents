@@ -187,10 +187,10 @@
 /* ── Animated wave ── */
 .hero-wave {
   position: absolute;
-  bottom: 70px;
+  bottom: 60px;
   left: 0;
   right: 0;
-  height: 200px;
+  height: 280px;
   z-index: 0;
   pointer-events: none;
   line-height: 0;
@@ -202,24 +202,33 @@
 }
 
 .wave-1 {
-  fill: rgba(212, 168, 50, 0.09);
-  animation: waveFloat 7s ease-in-out infinite alternate;
+  fill: rgba(212, 168, 50, 0.11);
+  animation: waveFloat1 5s ease-in-out infinite alternate;
 }
 
 .wave-2 {
-  fill: rgba(212, 168, 50, 0.06);
-  animation: waveFloat 9s ease-in-out infinite alternate-reverse;
+  fill: rgba(212, 168, 50, 0.08);
+  animation: waveFloat2 7s ease-in-out infinite alternate-reverse;
 }
 
 .wave-3 {
-  fill: rgba(212, 168, 50, 0.04);
-  animation: waveFloat 11s ease-in-out infinite alternate;
+  fill: rgba(212, 168, 50, 0.05);
+  animation: waveFloat3 9s ease-in-out infinite alternate;
 }
 
-@keyframes waveFloat {
+@keyframes waveFloat1 {
   0%   { transform: translateX(0) scaleY(1); }
-  50%  { transform: translateX(-20px) scaleY(1.08); }
-  100% { transform: translateX(20px) scaleY(0.95); }
+  100% { transform: translateX(-60px) scaleY(1.35); }
+}
+
+@keyframes waveFloat2 {
+  0%   { transform: translateX(0) scaleY(0.9); }
+  100% { transform: translateX(70px) scaleY(1.4); }
+}
+
+@keyframes waveFloat3 {
+  0%   { transform: translateX(-30px) scaleY(1.1); }
+  100% { transform: translateX(50px) scaleY(0.75); }
 }
 
 /* ── Stats strip ── */
@@ -228,7 +237,7 @@
   z-index: 1;
   border-top: 1px solid var(--border);
   background: rgba(212, 168, 50, 0.04);
-  padding: 1.3rem 0;
+  padding: 1.3rem 0 4.5rem; /* extra bottom so navbar doesn't overlap */
 }
 
 .stats-row {

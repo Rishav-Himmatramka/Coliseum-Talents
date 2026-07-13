@@ -3,11 +3,104 @@
   border-top: 1px solid var(--border);
 }
 
-.expertise-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.2rem;
+.expertise-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-bottom: 2rem;
 }
+
+.expertise-card {
+  position: sticky;
+  top: calc(5rem + var(--stack-index, 0) * 2.2rem);
+  background: linear-gradient(
+    145deg,
+    hsl(42, calc(30% + var(--stack-index, 0) * 3%), calc(10% + var(--stack-index, 0) * 1.5%)),
+    #0f0c06
+  );
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.2rem;
+  min-height: 220px;
+  position: sticky;
+  z-index: calc(var(--stack-index, 0) + 1);
+  transition: border-color 220ms ease, box-shadow 220ms ease;
+  overflow: hidden;
+}
+
+.expertise-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.expertise-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 32px rgba(212, 168, 50, 0.1);
+}
+
+.expertise-card:hover::before {
+  opacity: 1;
+}
+
+.card-num {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: var(--accent-2);
+}
+
+.expertise-card h3 {
+  font-size: 1.3rem;
+  color: var(--text);
+}
+
+.expertise-card > p {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  max-width: 680px;
+}
+
+.expertise-card ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.expertise-card ul li {
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  background: var(--surface);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 760px) {
+  .expertise-card {
+    position: relative;
+    top: auto;
+    min-height: auto;
+  }
+}
+
 
 .expertise-card {
   background: linear-gradient(145deg, #171208, #0f0c06);

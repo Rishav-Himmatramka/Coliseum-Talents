@@ -55,9 +55,13 @@ export default function Expertise() {
           <p>From artist management and celebrity bookings to corporate entertainment and event consulting — tailored to India's leading brands.</p>
         </div>
 
-        <div className="expertise-grid">
+        <div className="expertise-stack">
           {CARDS.map((card, i) => (
-            <article key={card.num} className={`expertise-card fade-up delay-${i + 1}`}>
+            <article
+              key={card.num}
+              className="expertise-card fade-up"
+              style={{ '--stack-index': i }}
+            >
               <span className="card-num">{card.num}</span>
               <h3>{card.title}</h3>
               <p>{card.desc}</p>

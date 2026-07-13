@@ -99,16 +99,16 @@
   margin: clamp(3px, 0.6vw, 8px) 0;
 }
 
-/* Col 2, Row 3 — starts aligned with OLISEUM, padded left by ~O char width */
+/* Col 2, Row 3 — right-aligned under OLISEUM */
 .wm-talents {
   grid-column: 2;
   grid-row: 3;
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: clamp(1.1rem, 2.8vw, 2.5rem);
-  /* O-char offset: ~0.82em of OLISEUM font size = 0.82 * clamp(3rem,8vw,7.5rem) */
-  padding-left: clamp(2.5rem, 6.5vw, 6.1rem);
-  letter-spacing: 0.48em;
+  padding-left: 0;
+  letter-spacing: 0.55em;
+  text-align: right;
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

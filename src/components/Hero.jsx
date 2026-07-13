@@ -17,26 +17,21 @@ export default function Hero() {
   useEffect(() => {
     const hero = heroRef.current
     if (!hero) return
-
     const onMove = (e) => {
       const rect = hero.getBoundingClientRect()
       posRef.current.tx = ((e.clientX - rect.left) / rect.width - 0.5) * 2
       posRef.current.ty = ((e.clientY - rect.top) / rect.height - 0.5) * 2
     }
-
     const animate = () => {
       const p = posRef.current
       p.x += (p.tx - p.x) * 0.055
       p.y += (p.ty - p.y) * 0.055
-
       if (arc1Ref.current)
         arc1Ref.current.style.transform = `rotate(${p.x * 12}deg) translateY(${p.y * 7}px)`
       if (arc2Ref.current)
         arc2Ref.current.style.transform = `rotate(${p.x * 22}deg) translateY(${p.y * 13}px)`
-
       rafRef.current = requestAnimationFrame(animate)
     }
-
     hero.addEventListener('mousemove', onMove)
     rafRef.current = requestAnimationFrame(animate)
     return () => {
@@ -45,60 +40,69 @@ export default function Hero() {
     }
   }, [])
 
+  /*
+   * Tight arc geometry matching logo (viewBox 220x220, center 110,110):
+   *
+   * Core C   r=62  gap ±40°  arc=280°  stroke=14
+   *   start(157.5,70.1) end(157.5,149.9)
+   *
+   * Strip 1  r=74  gap ±42°  arc=276°  stroke=10   (8px clearance from C edge)
+   *   cos42=0.743 sin42=0.669
+   *   start(165.0,60.5) end(165.0,159.5)
+   *
+   * Strip 2  r=86  gap ±45°  arc=270°  stroke=7    (8px clearance from strip1 edge)
+   *   cos45=0.707 sin45=0.707
+   *   start(170.8,49.2) end(170.8,170.8)
+   */
+
   return (
     <section className="hero" id="top" ref={heroRef}>
       <div className="hero-bg" />
 
-      <div className={`hero-center${visible ? " visible" : ""}`}>
-        {/*
-          CSS Grid layout:
-            col 1 = C svg width (--c-w)
-            col 2 = OLISEUM text (auto)
-
-          Row 1: [C svg] [OLISEUM]
-          Row 2: [--- divider ---]
-          Row 3: [     ] [TALENTS] <- grid-col 2, padded left by O-char width
-        */}
+      <div className={`hero-center${visible ? ' visible' : ''}`}>
         <div className="hero-wordmark">
 
           <div className="wm-c-wrap">
             <svg
               className="wm-c-svg"
-              viewBox="0 0 230 230"
+              viewBox="0 0 220 220"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
             >
               <defs>
-                <linearGradient id="cg" x1="0" y1="0" x2="230" y2="230" gradientUnits="userSpaceOnUse">
+                <linearGradient id="cg" x1="0" y1="0" x2="220" y2="220" gradientUnits="userSpaceOnUse">
                   <stop offset="0%" stopColor="#f0d470"/>
                   <stop offset="100%" stopColor="#b8860b"/>
                 </linearGradient>
               </defs>
+
+              {/* Core C */}
               <path
                 d="M 157.5,70.1 A 62,62 0 1,0 157.5,149.9"
-                stroke="url(#cg)" strokeWidth="16" strokeLinecap="round" fill="none"
+                stroke="url(#cg)" strokeWidth="14" strokeLinecap="round" fill="none"
               />
-              <g ref={arc1Ref} style={{transformOrigin:"110px 110px"}}>
+
+              {/* Strip 1 — r=74, 8px gap from C, reacts to cursor */}
+              <g ref={arc1Ref} style={{ transformOrigin: '110px 110px' }}>
                 <path
-                  d="M 165.6,52.5 A 80,80 0 1,0 165.6,167.5"
-                  stroke="url(#cg)" strokeWidth="9" strokeLinecap="round" fill="none" opacity="0.82"
+                  d="M 165.0,60.5 A 74,74 0 1,0 165.0,159.5"
+                  stroke="url(#cg)" strokeWidth="10" strokeLinecap="round" fill="none" opacity="0.82"
                 />
               </g>
-              <g ref={arc2Ref} style={{transformOrigin:"110px 110px"}}>
+
+              {/* Strip 2 — r=86, 8px gap from strip1, reacts more */}
+              <g ref={arc2Ref} style={{ transformOrigin: '110px 110px' }}>
                 <path
-                  d="M 173.0,34.9 A 98,98 0 1,0 173.0,185.1"
-                  stroke="url(#cg)" strokeWidth="6" strokeLinecap="round" fill="none" opacity="0.62"
+                  d="M 170.8,49.2 A 86,86 0 1,0 170.8,170.8"
+                  stroke="url(#cg)" strokeWidth="7" strokeLinecap="round" fill="none" opacity="0.65"
                 />
               </g>
             </svg>
           </div>
 
           <span className="wm-text wm-oliseum">OLISEUM</span>
-
           <div className="wm-divider" />
-
-          {/* TALENTS in col 2, padded left by O-char width → starts under L */}
           <span className="wm-text wm-talents">TALENTS</span>
 
         </div>
@@ -110,7 +114,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className={`scroll-hint${visible ? " visible" : ""}`}>
+      <div className={`scroll-hint${visible ? ' visible' : ''}`}>
         <span>Scroll to Explore</span>
         <div className="scroll-mouse">
           <div className="scroll-wheel" />

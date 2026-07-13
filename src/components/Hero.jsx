@@ -3,7 +3,9 @@ import './Hero.css'
 
 export default function Hero() {
   const [visible, setVisible] = useState(false)
-  const orbRef = useRef()
+  const arc1Ref = useRef()
+  const arc2Ref = useRef()
+  const arc3Ref = useRef()
   const heroRef = useRef()
   const rafRef = useRef()
   const posRef = useRef({ x: 0, y: 0, tx: 0, ty: 0 })
@@ -27,11 +29,13 @@ export default function Hero() {
       const p = posRef.current
       p.x += (p.tx - p.x) * 0.055
       p.y += (p.ty - p.y) * 0.055
-      if (orbRef.current) {
-        const dx = p.x * 72
-        const dy = p.y * 48
-        orbRef.current.style.transform = `translate(${dx}px, ${dy}px)`
-      }
+
+      // Each arc layer rotates a different amount = parallax depth
+      const rx = p.x, ry = p.y
+      if (arc1Ref.current) arc1Ref.current.style.transform = `rotate(${rx * 8}deg) translateY(${ry * 5}px)`
+      if (arc2Ref.current) arc2Ref.current.style.transform = `rotate(${rx * 14}deg) translateY(${ry * 9}px)`
+      if (arc3Ref.current) arc3Ref.current.style.transform = `rotate(${rx * 20}deg) translateY(${ry * 13}px)`
+
       rafRef.current = requestAnimationFrame(animate)
     }
 
@@ -48,51 +52,91 @@ export default function Hero() {
       <div className="hero-bg" />
 
       <div className={`hero-center${visible ? ' visible' : ''}`}>
-
-        {/* Styled wordmark */}
         <div className="hero-wordmark">
 
-          {/* Top row: COLISEUM with floating orb */}
+          {/* Row 1: Interactive C + OLISEUM */}
           <div className="wm-row-top">
-            <span className="wm-text wm-coliseum">COLISEUM</span>
-            <div className="wm-orb" ref={orbRef}>
-              <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <circle cx="80" cy="80" r="72" stroke="url(#g1)" strokeWidth="3.5"/>
-                <circle cx="80" cy="80" r="54" stroke="url(#g2)" strokeWidth="1.5" strokeDasharray="8 5" opacity="0.7"/>
-                <circle cx="80" cy="80" r="32" fill="url(#gr)" />
-                <circle cx="80" cy="80" r="18" fill="url(#g3)" opacity="0.5"/>
+
+            {/* Interactive C with concentric arc strips */}
+            <div className="wm-c-wrap">
+              <svg
+                className="wm-c-svg"
+                viewBox="0 0 200 200"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
                 <defs>
-                  <linearGradient id="g1" x1="0" y1="0" x2="160" y2="160" gradientUnits="userSpaceOnUse">
+                  <linearGradient id="cg1" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
                     <stop offset="0%" stopColor="#f0d470"/>
-                    <stop offset="100%" stopColor="#a07820"/>
+                    <stop offset="100%" stopColor="#c49a2c"/>
                   </linearGradient>
-                  <linearGradient id="g2" x1="160" y1="0" x2="0" y2="160" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stopColor="#f0d470" stopOpacity="0.9"/>
-                    <stop offset="100%" stopColor="#d4a832" stopOpacity="0.3"/>
+                  <linearGradient id="cg2" x1="200" y1="0" x2="0" y2="200" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#e8c96a" stopOpacity="0.85"/>
+                    <stop offset="100%" stopColor="#a07820" stopOpacity="0.4"/>
                   </linearGradient>
-                  <radialGradient id="gr" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stopColor="#f0d470" stopOpacity="0.25"/>
-                    <stop offset="100%" stopColor="#c49a2c" stopOpacity="0"/>
-                  </radialGradient>
-                  <radialGradient id="g3" cx="40%" cy="35%" r="50%">
-                    <stop offset="0%" stopColor="#fff8e0" stopOpacity="0.7"/>
-                    <stop offset="100%" stopColor="#d4a832" stopOpacity="0"/>
-                  </radialGradient>
+                  <linearGradient id="cg3" x1="0" y1="200" x2="200" y2="0" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#d4a832" stopOpacity="0.6"/>
+                    <stop offset="100%" stopColor="#f0d470" stopOpacity="0.2"/>
+                  </linearGradient>
                 </defs>
+
+                {/* Core C — thick, static (the main letter shape) */}
+                {/* Arc from ~40deg to ~320deg (opening right) */}
+                <path
+                  d="M 155,55 A 65,65 0 1,0 155,145"
+                  stroke="url(#cg1)"
+                  strokeWidth="14"
+                  strokeLinecap="round"
+                />
+
+                {/* Arc strip 1 — slightly larger, reacts to cursor */}
+                <g ref={arc1Ref} style={{transformOrigin: '100px 100px'}}>
+                  <path
+                    d="M 167,42 A 80,80 0 1,0 167,158"
+                    stroke="url(#cg2)"
+                    strokeWidth="4.5"
+                    strokeLinecap="round"
+                  />
+                </g>
+
+                {/* Arc strip 2 — larger, reacts more */}
+                <g ref={arc2Ref} style={{transformOrigin: '100px 100px'}}>
+                  <path
+                    d="M 177,30 A 94,94 0 1,0 177,170"
+                    stroke="url(#cg3)"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    opacity="0.7"
+                  />
+                </g>
+
+                {/* Arc strip 3 — outermost, reacts most */}
+                <g ref={arc3Ref} style={{transformOrigin: '100px 100px'}}>
+                  <path
+                    d="M 186,18 A 106,106 0 1,0 186,182"
+                    stroke="url(#cg2)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    opacity="0.4"
+                  />
+                </g>
               </svg>
             </div>
+
+            <span className="wm-text wm-oliseum">OLISEUM</span>
           </div>
 
-          {/* Divider line */}
+          {/* Divider */}
           <div className="wm-divider" />
 
-          {/* Bottom row: TALENTS */}
+          {/* Row 2: TALENTS */}
           <div className="wm-row-bottom">
             <span className="wm-text wm-talents">TALENTS</span>
           </div>
         </div>
 
-        <p className="hero-tagline">Boutique Talent Management &amp; Consulting · India</p>
+        <p className="hero-tagline">Boutique Talent Management · Consulting · India</p>
         <div className="hero-ctas">
           <a href="#about" className="btn btn-primary">Explore</a>
           <a href="#contact" className="btn btn-secondary">Book an Artist</a>
@@ -116,25 +160,13 @@ export default function Hero() {
 
       <div className="hero-stats-strip">
         <div className="container stats-row">
-          <div className="stat">
-            <strong>10+</strong>
-            <span>Years of experience</span>
-          </div>
+          <div className="stat"><strong>10+</strong><span>Years of experience</span></div>
           <div className="stat-divider" />
-          <div className="stat">
-            <strong>500+</strong>
-            <span>Events delivered across India</span>
-          </div>
+          <div className="stat"><strong>500+</strong><span>Events delivered across India</span></div>
           <div className="stat-divider" />
-          <div className="stat">
-            <strong>50+</strong>
-            <span>Leading brand clients</span>
-          </div>
+          <div className="stat"><strong>50+</strong><span>Leading brand clients</span></div>
           <div className="stat-divider" />
-          <div className="stat">
-            <strong>100%</strong>
-            <span>End-to-end managed</span>
-          </div>
+          <div className="stat"><strong>100%</strong><span>End-to-end managed</span></div>
         </div>
       </div>
     </section>

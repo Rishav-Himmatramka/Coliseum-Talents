@@ -38,8 +38,6 @@
   transform: translateY(0);
 }
 
-.hero-logo-wrap { display: none; }
-
 /* ── Interactive Wordmark ── */
 .hero-wordmark {
   display: flex;
@@ -66,45 +64,55 @@
   background-clip: text;
 }
 
-.wm-coliseum {
-  font-size: clamp(3rem, 8vw, 7.5rem);
-  letter-spacing: 0.12em;
-}
-
-/* The floating orb lives inline between the text rows */
-.wm-orb {
-  width: clamp(80px, 10vw, 140px);
-  height: clamp(80px, 10vw, 140px);
+/* Interactive C SVG */
+.wm-c-wrap {
   flex-shrink: 0;
-  margin: 0 clamp(4px, 0.8vw, 14px);
-  transition: transform 0.05s linear;
-  filter: drop-shadow(0 0 28px rgba(212, 168, 50, 0.55));
-  animation: orbPulse 4s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes orbPulse {
-  0%, 100% { filter: drop-shadow(0 0 20px rgba(212, 168, 50, 0.45)); }
-  50%       { filter: drop-shadow(0 0 44px rgba(240, 212, 112, 0.75)); }
+.wm-c-svg {
+  width: clamp(80px, 11vw, 148px);
+  height: clamp(80px, 11vw, 148px);
+  overflow: visible;
+  filter: drop-shadow(0 0 22px rgba(212, 168, 50, 0.5));
+  animation: cGlow 3.5s ease-in-out infinite;
+}
+
+@keyframes cGlow {
+  0%, 100% { filter: drop-shadow(0 0 18px rgba(212, 168, 50, 0.4)); }
+  50%       { filter: drop-shadow(0 0 40px rgba(240, 212, 112, 0.7)); }
+}
+
+/* The arc strip groups transition smoothly */
+.wm-c-svg g {
+  transition: transform 0.05s linear;
+}
+
+.wm-oliseum {
+  font-size: clamp(3rem, 8vw, 7.5rem);
+  letter-spacing: 0.08em;
+  margin-left: clamp(-8px, -0.5vw, -4px);
 }
 
 .wm-divider {
   width: 100%;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--accent-dim), transparent);
-  margin: clamp(4px, 0.8vw, 12px) 0;
+  margin: clamp(4px, 0.8vw, 10px) 0;
 }
 
 .wm-row-bottom {
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  padding-right: 0.2em;
+  padding-right: 0.15em;
 }
 
 .wm-talents {
   font-size: clamp(1.2rem, 3.2vw, 2.8rem);
   letter-spacing: 0.55em;
-  color: var(--accent-2);
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -114,7 +122,7 @@
 .hero-tagline {
   font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
   margin-top: 0.5rem;
@@ -267,13 +275,13 @@
   .stats-row { flex-wrap: wrap; gap: 1.5rem; justify-content: center; }
   .stat-divider { display: none; }
   .stat { flex: 0 0 40%; }
-  .wm-orb { width: 72px; height: 72px; }
+  .wm-c-svg { width: 72px; height: 72px; }
 }
 
 @media (max-width: 560px) {
   .hero-ctas { flex-direction: column; align-items: center; }
   .stat { flex: 0 0 45%; }
-  .wm-coliseum { letter-spacing: 0.06em; }
-  .wm-talents { letter-spacing: 0.3em; }
-  .wm-orb { display: none; }
+  .wm-oliseum { letter-spacing: 0.04em; }
+  .wm-talents { letter-spacing: 0.28em; }
+  .wm-c-svg { width: 56px; height: 56px; }
 }

@@ -2,13 +2,11 @@ import { useState, useRef } from 'react'
 import useFadeIn from '../hooks/useFadeIn'
 import './Contact.css'
 
-const EVENT_TYPES = ['', 'Corporate Event', 'Awards & Gala', 'Leadership Summit', 'Private Celebration', 'Brand Launch', 'Other']
-
 export default function Contact() {
   const ref = useRef()
   useFadeIn(ref)
 
-  const [form, setForm] = useState({ name: '', company: '', eventType: '', message: '' })
+  const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
 
   const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }))
@@ -63,13 +61,23 @@ export default function Contact() {
                   />
                 </div>
               </div>
-              <div className="form-group">
-                <label htmlFor="eventType">Event Type *</label>
-                <select id="eventType" name="eventType" value={form.eventType} onChange={handleChange} required>
-                  {EVENT_TYPES.map(t => (
-                    <option key={t} value={t} disabled={!t}>{t || 'Select event type…'}</option>
-                  ))}
-                </select>
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="email">Email Address *</label>
+                  <input
+                    id="email" name="email" type="email"
+                    placeholder="your@email.com"
+                    value={form.email} onChange={handleChange} required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="phone">Contact Number *</label>
+                  <input
+                    id="phone" name="phone" type="tel"
+                    placeholder="+91 98765 43210"
+                    value={form.phone} onChange={handleChange} required
+                  />
+                </div>
               </div>
               <div className="form-group">
                 <label htmlFor="message">Tell us about your event *</label>

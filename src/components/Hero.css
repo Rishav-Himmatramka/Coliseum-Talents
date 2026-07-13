@@ -103,15 +103,17 @@
   margin: clamp(4px, 0.8vw, 10px) 0;
 }
 
+/* TALENTS starts under L of COLISEUM:
+   indent = C-svg-width + ~width of "O" char (≈0.62em of oliseum font-size) */
 .wm-row-bottom {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
-  padding-right: 0.15em;
+  justify-content: flex-start;
+  padding-left: calc(clamp(80px, 11vw, 148px) + clamp(3rem, 4.5vw, 4.2rem));
 }
 
 .wm-talents {
-  font-size: clamp(1.2rem, 3.2vw, 2.8rem);
+  font-size: clamp(1.1rem, 2.8vw, 2.5rem);
   letter-spacing: 0.55em;
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
   -webkit-background-clip: text;

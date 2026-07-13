@@ -46,16 +46,19 @@ export default function Hero() {
   }, [])
 
   /*
-   * Logo analysis (center 110,110, viewBox 220x220):
+   * Arc geometry (viewBox 230x230, center 110,110):
    *
-   * Core C  — r=62, gap -40° to +40° → arc=280°, strokeWidth=16
-   *   start: (157.5, 70.1)  end: (157.5, 149.9)
+   * Core C   — r=62,  gap ±40° → arc 280°  stroke=16
+   *   endpoints: (157.5, 70.1) / (157.5, 149.9)
    *
-   * Strip 1 — r=80, gap -62° to +62° → arc=236°, strokeWidth=9
-   *   start: (147.5, 39.4)  end: (147.5, 180.6)
+   * Strip 1  — r=80,  gap ±46° → arc 268°  stroke=9
+   *   endpoints: (165.6, 52.5) / (165.6, 167.5)
    *
-   * Strip 2 — r=97, gap -78° to +78° → arc=204°, strokeWidth=6
-   *   start: (130.1, 15.9)  end: (130.1, 204.1)
+   * Strip 2  — r=98,  gap ±50° → arc 260°  stroke=6
+   *   cos50=0.643 sin50=0.766
+   *   endpoints: (173.0, 34.9) / (173.0, 185.1)
+   *
+   * Outer strip goes nearly as far right as the C, matching logo.
    */
 
   return (
@@ -65,19 +68,17 @@ export default function Hero() {
       <div className={`hero-center${visible ? " visible" : ""}`}>
         <div className="hero-wordmark">
 
-          {/* Row 1: Interactive C + OLISEUM */}
           <div className="wm-row-top">
-
             <div className="wm-c-wrap">
               <svg
                 className="wm-c-svg"
-                viewBox="0 0 220 220"
+                viewBox="0 0 230 230"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
               >
                 <defs>
-                  <linearGradient id="cg" x1="0" y1="0" x2="220" y2="220" gradientUnits="userSpaceOnUse">
+                  <linearGradient id="cg" x1="0" y1="0" x2="230" y2="230" gradientUnits="userSpaceOnUse">
                     <stop offset="0%" stopColor="#f0d470"/>
                     <stop offset="100%" stopColor="#b8860b"/>
                   </linearGradient>
@@ -92,27 +93,27 @@ export default function Hero() {
                   fill="none"
                 />
 
-                {/* Strip 1 — medium, reacts to cursor */}
+                {/* Strip 1 — gap ±46°, slightly shorter, reacts to cursor */}
                 <g ref={arc1Ref} style={{transformOrigin:"110px 110px"}}>
                   <path
-                    d="M 147.5,39.4 A 80,80 0 1,0 147.5,180.6"
+                    d="M 165.6,52.5 A 80,80 0 1,0 165.6,167.5"
                     stroke="url(#cg)"
                     strokeWidth="9"
                     strokeLinecap="round"
                     fill="none"
-                    opacity="0.85"
+                    opacity="0.82"
                   />
                 </g>
 
-                {/* Strip 2 — thinner, reacts more */}
+                {/* Strip 2 — gap ±50°, slightly shorter than strip1, reacts more */}
                 <g ref={arc2Ref} style={{transformOrigin:"110px 110px"}}>
                   <path
-                    d="M 130.1,15.9 A 97,97 0 1,0 130.1,204.1"
+                    d="M 173.0,34.9 A 98,98 0 1,0 173.0,185.1"
                     stroke="url(#cg)"
                     strokeWidth="6"
                     strokeLinecap="round"
                     fill="none"
-                    opacity="0.65"
+                    opacity="0.62"
                   />
                 </g>
               </svg>
@@ -123,6 +124,7 @@ export default function Hero() {
 
           <div className="wm-divider" />
 
+          {/* TALENTS starts under the L of COLISEUM — indented by C-width + O-char */}
           <div className="wm-row-bottom">
             <span className="wm-text wm-talents">TALENTS</span>
           </div>

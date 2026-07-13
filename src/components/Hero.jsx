@@ -5,7 +5,6 @@ export default function Hero() {
   const [visible, setVisible] = useState(false)
   const arc1Ref = useRef()
   const arc2Ref = useRef()
-  const arc3Ref = useRef()
   const heroRef = useRef()
   const rafRef = useRef()
   const posRef = useRef({ x: 0, y: 0, tx: 0, ty: 0 })
@@ -30,11 +29,10 @@ export default function Hero() {
       p.x += (p.tx - p.x) * 0.055
       p.y += (p.ty - p.y) * 0.055
 
-      // Each arc layer rotates a different amount = parallax depth
-      const rx = p.x, ry = p.y
-      if (arc1Ref.current) arc1Ref.current.style.transform = `rotate(${rx * 8}deg) translateY(${ry * 5}px)`
-      if (arc2Ref.current) arc2Ref.current.style.transform = `rotate(${rx * 14}deg) translateY(${ry * 9}px)`
-      if (arc3Ref.current) arc3Ref.current.style.transform = `rotate(${rx * 20}deg) translateY(${ry * 13}px)`
+      if (arc1Ref.current)
+        arc1Ref.current.style.transform = `rotate(${p.x * 12}deg) translateY(${p.y * 7}px)`
+      if (arc2Ref.current)
+        arc2Ref.current.style.transform = `rotate(${p.x * 22}deg) translateY(${p.y * 13}px)`
 
       rafRef.current = requestAnimationFrame(animate)
     }
@@ -47,78 +45,74 @@ export default function Hero() {
     }
   }, [])
 
+  /*
+   * Logo analysis (center 110,110, viewBox 220x220):
+   *
+   * Core C  — r=62, gap -40° to +40° → arc=280°, strokeWidth=16
+   *   start: (157.5, 70.1)  end: (157.5, 149.9)
+   *
+   * Strip 1 — r=80, gap -62° to +62° → arc=236°, strokeWidth=9
+   *   start: (147.5, 39.4)  end: (147.5, 180.6)
+   *
+   * Strip 2 — r=97, gap -78° to +78° → arc=204°, strokeWidth=6
+   *   start: (130.1, 15.9)  end: (130.1, 204.1)
+   */
+
   return (
     <section className="hero" id="top" ref={heroRef}>
       <div className="hero-bg" />
 
-      <div className={`hero-center${visible ? ' visible' : ''}`}>
+      <div className={`hero-center${visible ? " visible" : ""}`}>
         <div className="hero-wordmark">
 
           {/* Row 1: Interactive C + OLISEUM */}
           <div className="wm-row-top">
 
-            {/* Interactive C with concentric arc strips */}
             <div className="wm-c-wrap">
               <svg
                 className="wm-c-svg"
-                viewBox="0 0 200 200"
+                viewBox="0 0 220 220"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
               >
                 <defs>
-                  <linearGradient id="cg1" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+                  <linearGradient id="cg" x1="0" y1="0" x2="220" y2="220" gradientUnits="userSpaceOnUse">
                     <stop offset="0%" stopColor="#f0d470"/>
-                    <stop offset="100%" stopColor="#c49a2c"/>
-                  </linearGradient>
-                  <linearGradient id="cg2" x1="200" y1="0" x2="0" y2="200" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stopColor="#e8c96a" stopOpacity="0.85"/>
-                    <stop offset="100%" stopColor="#a07820" stopOpacity="0.4"/>
-                  </linearGradient>
-                  <linearGradient id="cg3" x1="0" y1="200" x2="200" y2="0" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stopColor="#d4a832" stopOpacity="0.6"/>
-                    <stop offset="100%" stopColor="#f0d470" stopOpacity="0.2"/>
+                    <stop offset="100%" stopColor="#b8860b"/>
                   </linearGradient>
                 </defs>
 
-                {/* Core C — thick, static (the main letter shape) */}
-                {/* Arc from ~40deg to ~320deg (opening right) */}
+                {/* Core C — thick, static */}
                 <path
-                  d="M 155,55 A 65,65 0 1,0 155,145"
-                  stroke="url(#cg1)"
-                  strokeWidth="14"
+                  d="M 157.5,70.1 A 62,62 0 1,0 157.5,149.9"
+                  stroke="url(#cg)"
+                  strokeWidth="16"
                   strokeLinecap="round"
+                  fill="none"
                 />
 
-                {/* Arc strip 1 — slightly larger, reacts to cursor */}
-                <g ref={arc1Ref} style={{transformOrigin: '100px 100px'}}>
+                {/* Strip 1 — medium, reacts to cursor */}
+                <g ref={arc1Ref} style={{transformOrigin:"110px 110px"}}>
                   <path
-                    d="M 167,42 A 80,80 0 1,0 167,158"
-                    stroke="url(#cg2)"
-                    strokeWidth="4.5"
+                    d="M 147.5,39.4 A 80,80 0 1,0 147.5,180.6"
+                    stroke="url(#cg)"
+                    strokeWidth="9"
                     strokeLinecap="round"
+                    fill="none"
+                    opacity="0.85"
                   />
                 </g>
 
-                {/* Arc strip 2 — larger, reacts more */}
-                <g ref={arc2Ref} style={{transformOrigin: '100px 100px'}}>
+                {/* Strip 2 — thinner, reacts more */}
+                <g ref={arc2Ref} style={{transformOrigin:"110px 110px"}}>
                   <path
-                    d="M 177,30 A 94,94 0 1,0 177,170"
-                    stroke="url(#cg3)"
-                    strokeWidth="3"
+                    d="M 130.1,15.9 A 97,97 0 1,0 130.1,204.1"
+                    stroke="url(#cg)"
+                    strokeWidth="6"
                     strokeLinecap="round"
-                    opacity="0.7"
-                  />
-                </g>
-
-                {/* Arc strip 3 — outermost, reacts most */}
-                <g ref={arc3Ref} style={{transformOrigin: '100px 100px'}}>
-                  <path
-                    d="M 186,18 A 106,106 0 1,0 186,182"
-                    stroke="url(#cg2)"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    opacity="0.4"
+                    fill="none"
+                    opacity="0.65"
                   />
                 </g>
               </svg>
@@ -127,23 +121,21 @@ export default function Hero() {
             <span className="wm-text wm-oliseum">OLISEUM</span>
           </div>
 
-          {/* Divider */}
           <div className="wm-divider" />
 
-          {/* Row 2: TALENTS */}
           <div className="wm-row-bottom">
             <span className="wm-text wm-talents">TALENTS</span>
           </div>
         </div>
 
-        <p className="hero-tagline">Boutique Talent Management · Consulting · India</p>
+        <p className="hero-tagline">Boutique Talent Management&nbsp;&middot;&nbsp;Consulting&nbsp;&middot;&nbsp;India</p>
         <div className="hero-ctas">
           <a href="#about" className="btn btn-primary">Explore</a>
           <a href="#contact" className="btn btn-secondary">Book an Artist</a>
         </div>
       </div>
 
-      <div className={`scroll-hint${visible ? ' visible' : ''}`}>
+      <div className={`scroll-hint${visible ? " visible" : ""}`}>
         <span>Scroll to Explore</span>
         <div className="scroll-mouse">
           <div className="scroll-wheel" />

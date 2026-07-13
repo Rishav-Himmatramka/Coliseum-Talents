@@ -1,4 +1,5 @@
 import Cursor from './components/Cursor'
+import TopBar from './components/TopBar'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -17,6 +18,7 @@ export default function App() {
   return (
     <>
       <Cursor />
+      <TopBar />
       <Navbar />
       <Hero />
       <About />

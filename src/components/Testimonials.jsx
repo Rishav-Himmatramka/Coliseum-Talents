@@ -20,8 +20,8 @@ export default function Testimonials() {
   return (
     <section className="section testimonials-section" ref={ref}>
       <div className="container">
-        <div className="section-heading fade-up" style={{ textAlign: 'center' }}>
-          <div className="gold-line" style={{ margin: '0 auto 1.5rem' }} />
+        <div className="section-heading fade-up">
+          <div className="gold-line" />
           <p className="eyebrow">Client testimonials</p>
           <h2>Trusted by the world's most discerning hosts.</h2>
         </div>

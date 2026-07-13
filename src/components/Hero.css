@@ -98,31 +98,67 @@
   color: var(--muted);
 }
 
-.scroll-line {
-  width: 1px;
-  height: 48px;
-  background: linear-gradient(to bottom, var(--accent-2), transparent);
-  animation: scrollPulse 1.8s ease-in-out infinite;
+/* Mouse icon */
+.scroll-mouse {
+  width: 22px;
+  height: 34px;
+  border: 2px solid var(--border-strong);
+  border-radius: 999px;
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
 }
 
-@keyframes scrollPulse {
-  0%, 100% { opacity: 0.4; transform: scaleY(1); }
-  50% { opacity: 1; transform: scaleY(1.15); }
+.scroll-wheel {
+  width: 3px;
+  height: 6px;
+  background: var(--accent-2);
+  border-radius: 999px;
+  animation: scrollWheel 1.8s ease infinite;
 }
 
-/* ── Wave ── */
+@keyframes scrollWheel {
+  0%   { opacity: 1; transform: translateY(0); }
+  80%  { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 0; transform: translateY(0); }
+}
+
+/* ── Animated wave ── */
 .hero-wave {
   position: absolute;
-  bottom: 80px;
+  bottom: 70px;
   left: 0;
   right: 0;
+  height: 200px;
   z-index: 0;
+  pointer-events: none;
   line-height: 0;
 }
 
 .hero-wave svg {
   width: 100%;
-  height: auto;
+  height: 100%;
+}
+
+.wave-1 {
+  fill: rgba(212, 168, 50, 0.09);
+  animation: waveFloat 7s ease-in-out infinite alternate;
+}
+
+.wave-2 {
+  fill: rgba(212, 168, 50, 0.06);
+  animation: waveFloat 9s ease-in-out infinite alternate-reverse;
+}
+
+.wave-3 {
+  fill: rgba(212, 168, 50, 0.04);
+  animation: waveFloat 11s ease-in-out infinite alternate;
+}
+
+@keyframes waveFloat {
+  0%   { transform: translateX(0) scaleY(1); }
+  50%  { transform: translateX(-20px) scaleY(1.08); }
+  100% { transform: translateX(20px) scaleY(0.95); }
 }
 
 /* ── Stats strip ── */

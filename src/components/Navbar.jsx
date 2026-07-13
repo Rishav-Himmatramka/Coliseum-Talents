@@ -22,11 +22,7 @@ export default function Navbar() {
 
   return (
     <header className={`navbar${scrolled ? ' scrolled' : ''}`}>
-      <div className="nav-inner container">
-        <a href="#top" className="nav-logo">
-          <img src="/logo.png" alt="Coliseum Talents" />
-        </a>
-
+      <div className="nav-inner">
         <nav className={`nav-links${menuOpen ? ' open' : ''}`}>
           {links.map(l => (
             <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)}>

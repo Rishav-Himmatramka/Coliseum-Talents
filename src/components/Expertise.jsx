@@ -59,8 +59,8 @@ export default function Expertise() {
           {CARDS.map((card, i) => (
             <article
               key={card.num}
-              className="expertise-card fade-up"
-              style={{ '--stack-index': i }}
+              className="expertise-card"
+              style={{ '--stack-i': i }}
             >
               <span className="card-num">{card.num}</span>
               <h3>{card.title}</h3>

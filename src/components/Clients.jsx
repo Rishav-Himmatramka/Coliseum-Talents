@@ -31,8 +31,8 @@ export default function Clients() {
   return (
     <section className="section clients-section" id="clients" ref={ref}>
       <div className="container">
-        <div className="section-heading fade-up" style={{ textAlign: 'center', margin: '0 auto 3rem' }}>
-          <div className="gold-line" style={{ margin: '0 auto 1.5rem' }} />
+        <div className="section-heading fade-up">
+          <div className="gold-line" />
           <p className="eyebrow">Our clients</p>
           <h2>Trusted by India's most respected organisations.</h2>
           <p>We've delivered talent solutions for leading brands across banking, insurance, technology, and beyond.</p>
@@ -47,7 +47,7 @@ export default function Clients() {
         </div>
 
         <div className="industries-wrap fade-up delay-2">
-          <p className="eyebrow" style={{ marginBottom: '1.2rem' }}>Industries we serve</p>
+          <p className="eyebrow">Industries we serve</p>
           <div className="industries-grid">
             {INDUSTRIES.map(ind => (
               <div key={ind.label} className="industry-item">

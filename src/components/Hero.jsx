@@ -27,13 +27,16 @@ export default function Hero() {
 
       <div className={`scroll-hint${visible ? ' visible' : ''}`}>
         <span>Scroll to Explore</span>
-        <div className="scroll-line" />
+        <div className="scroll-mouse">
+          <div className="scroll-wheel" />
+        </div>
       </div>
 
-      <div className="hero-wave">
-        <svg viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,80 C240,160 480,0 720,80 C960,160 1200,0 1440,80 L1440,180 L0,180 Z" fill="rgba(196,154,44,0.07)" />
-          <path d="M0,110 C360,40 720,160 1080,80 C1260,40 1380,100 1440,110 L1440,180 L0,180 Z" fill="rgba(196,154,44,0.04)" />
+      <div className="hero-wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path className="wave-path wave-1" d="M0,80 C240,160 480,0 720,80 C960,160 1200,0 1440,80 L1440,200 L0,200 Z" />
+          <path className="wave-path wave-2" d="M0,120 C360,50 720,170 1080,90 C1260,50 1380,110 1440,120 L1440,200 L0,200 Z" />
+          <path className="wave-path wave-3" d="M0,150 C300,100 600,180 900,140 C1100,110 1300,160 1440,150 L1440,200 L0,200 Z" />
         </svg>
       </div>
 

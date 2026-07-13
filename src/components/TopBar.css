@@ -1,0 +1,51 @@
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  pointer-events: none; /* let clicks pass through transparent areas */
+}
+
+.topbar-logo {
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+}
+
+.topbar-logo img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6));
+}
+
+.topbar-socials {
+  pointer-events: all;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.social-pill {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: rgba(10, 8, 4, 0.75);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  transition: color 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.social-pill:hover {
+  color: var(--accent-2);
+  border-color: var(--accent-2);
+  background: rgba(212, 168, 50, 0.1);
+}

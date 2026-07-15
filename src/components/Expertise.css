@@ -6,7 +6,8 @@
 /* ── Stacking cards ── */
 .expertise-stack {
   position: relative;
-  /* Each card ~320px tall + 80px scroll space × 6 cards */
+  max-width: 740px;
+  margin: 0 auto;
 }
 
 .expertise-card {

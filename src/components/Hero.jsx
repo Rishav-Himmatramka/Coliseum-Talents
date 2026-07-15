@@ -1,19 +1,17 @@
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import './Hero.css'
 
+const OLISEUM = ['O','L','I','S','E','U','M']
+const TALENTS = ['T','A','L','E','N','T','S']
+
 export default function Hero() {
-  const [visible, setVisible] = useState(false)
   const arc1Ref = useRef()
   const arc2Ref = useRef()
   const heroRef = useRef()
   const rafRef = useRef()
   const posRef = useRef({ x: 0, y: 0, tx: 0, ty: 0 })
 
-  useEffect(() => {
-    const t = setTimeout(() => setVisible(true), 100)
-    return () => clearTimeout(t)
-  }, [])
-
+  // Cursor-following arc parallax
   useEffect(() => {
     const hero = heroRef.current
     if (!hero) return
@@ -40,81 +38,92 @@ export default function Hero() {
     }
   }, [])
 
-  /*
-   * Tight arc geometry matching logo (viewBox 220x220, center 110,110):
-   *
-   * Core C   r=62  gap ±40°  arc=280°  stroke=14
-   *   start(157.5,70.1) end(157.5,149.9)
-   *
-   * Strip 1  r=74  gap ±42°  arc=276°  stroke=10   (8px clearance from C edge)
-   *   cos42=0.743 sin42=0.669
-   *   start(165.0,60.5) end(165.0,159.5)
-   *
-   * Strip 2  r=86  gap ±45°  arc=270°  stroke=7    (8px clearance from strip1 edge)
-   *   cos45=0.707 sin45=0.707
-   *   start(170.8,49.2) end(170.8,170.8)
-   */
-
   return (
     <section className="hero" id="top" ref={heroRef}>
       <div className="hero-bg" />
 
-      <div className={`hero-center${visible ? ' visible' : ''}`}>
+      <div className="hero-center">
         <div className="hero-wordmark">
 
-          <div className="wm-c-wrap">
-            <svg
-              className="wm-c-svg"
-              viewBox="0 0 220 220"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <defs>
-                <linearGradient id="cg" x1="0" y1="0" x2="220" y2="220" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stopColor="#f0d470"/>
-                  <stop offset="100%" stopColor="#b8860b"/>
-                </linearGradient>
-              </defs>
+          {/* Row 1: C arc (last, dramatic) + O L I S E U M (staggered drop) */}
+          <div className="wm-row-top">
 
-              {/* Core C */}
-              <path
-                d="M 157.5,70.1 A 62,62 0 1,0 157.5,149.9"
-                stroke="url(#cg)" strokeWidth="14" strokeLinecap="round" fill="none"
-              />
-
-              {/* Strip 1 — r=74, 8px gap from C, reacts to cursor */}
-              <g ref={arc1Ref} style={{ transformOrigin: '110px 110px' }}>
+            {/* C arc — drops in LAST after all letters */}
+            <div className="wm-c-wrap wm-c-drop">
+              <svg
+                className="wm-c-svg"
+                viewBox="0 0 220 220"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <defs>
+                  <linearGradient id="cg" x1="0" y1="0" x2="220" y2="220" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#f0d470"/>
+                    <stop offset="100%" stopColor="#b8860b"/>
+                  </linearGradient>
+                </defs>
                 <path
-                  d="M 165.0,60.5 A 74,74 0 1,0 165.0,159.5"
-                  stroke="url(#cg)" strokeWidth="10" strokeLinecap="round" fill="none" opacity="0.82"
+                  d="M 157.5,70.1 A 62,62 0 1,0 157.5,149.9"
+                  stroke="url(#cg)" strokeWidth="14" strokeLinecap="round" fill="none"
                 />
-              </g>
+                <g ref={arc1Ref} style={{ transformOrigin: '110px 110px' }}>
+                  <path
+                    d="M 165.0,60.5 A 74,74 0 1,0 165.0,159.5"
+                    stroke="url(#cg)" strokeWidth="10" strokeLinecap="round" fill="none" opacity="0.82"
+                  />
+                </g>
+                <g ref={arc2Ref} style={{ transformOrigin: '110px 110px' }}>
+                  <path
+                    d="M 170.8,49.2 A 86,86 0 1,0 170.8,170.8"
+                    stroke="url(#cg)" strokeWidth="7" strokeLinecap="round" fill="none" opacity="0.65"
+                  />
+                </g>
+              </svg>
+            </div>
 
-              {/* Strip 2 — r=86, 8px gap from strip1, reacts more */}
-              <g ref={arc2Ref} style={{ transformOrigin: '110px 110px' }}>
-                <path
-                  d="M 170.8,49.2 A 86,86 0 1,0 170.8,170.8"
-                  stroke="url(#cg)" strokeWidth="7" strokeLinecap="round" fill="none" opacity="0.65"
-                />
-              </g>
-            </svg>
+            {/* O L I S E U M — each letter drops in with stagger */}
+            <span className="wm-letters" aria-label="OLISEUM">
+              {OLISEUM.map((letter, i) => (
+                <span
+                  key={i}
+                  className="wm-letter"
+                  style={{ '--letter-i': i }}
+                >
+                  {letter}
+                </span>
+              ))}
+            </span>
           </div>
 
-          <span className="wm-text wm-oliseum">OLISEUM</span>
+          {/* Divider line — extends after letters finish */}
           <div className="wm-divider" />
-          <span className="wm-text wm-talents">TALENTS</span>
+
+          {/* T A L E N T S — each letter rises in after divider */}
+          <span className="wm-talents-wrap" aria-label="TALENTS">
+            {TALENTS.map((letter, i) => (
+              <span
+                key={i}
+                className="wm-talent-letter"
+                style={{ '--talent-i': i }}
+              >
+                {letter}
+              </span>
+            ))}
+          </span>
 
         </div>
 
-        <p className="hero-tagline">Boutique Talent Management&nbsp;&middot;&nbsp;Consulting&nbsp;&middot;&nbsp;India</p>
-        <div className="hero-ctas">
+        <p className="hero-tagline wm-tagline">
+          Boutique Talent Management&nbsp;&middot;&nbsp;Consulting&nbsp;&middot;&nbsp;India
+        </p>
+        <div className="hero-ctas wm-ctas">
           <a href="#about" className="btn btn-primary">Explore</a>
           <a href="#contact" className="btn btn-secondary">Book an Artist</a>
         </div>
       </div>
 
-      <div className={`scroll-hint${visible ? ' visible' : ''}`}>
+      <div className="scroll-hint wm-scroll">
         <span>Scroll to Explore</span>
         <div className="scroll-mouse">
           <div className="scroll-wheel" />

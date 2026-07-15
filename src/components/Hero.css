@@ -28,14 +28,31 @@
   text-align: center;
   padding: 4rem 1.5rem 5rem;
   gap: 1.2rem;
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.9s ease, transform 0.9s ease;
 }
 
-.hero-center.visible {
-  opacity: 1;
-  transform: translateY(0);
+/* ── Shared drop keyframe ── */
+@keyframes letterDrop {
+  0%   { opacity: 0; transform: translateY(-55px); }
+  70%  { opacity: 1; transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cDrop {
+  0%   { opacity: 0; transform: translateY(-80px) scale(0.92); }
+  60%  { opacity: 1; transform: translateY(6px) scale(1.03); }
+  80%  { transform: translateY(-2px) scale(0.99); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes lineExpand {
+  0%   { transform: scaleX(0); opacity: 0; }
+  20%  { opacity: 1; }
+  100% { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes fadeUp {
+  0%   { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 /* ── Interactive Wordmark — CSS Grid ── */
@@ -48,13 +65,24 @@
   row-gap: 0;
 }
 
-/* Col 1, Row 1 */
-.wm-c-wrap {
-  grid-column: 1;
+/* Row 1 wrapper (needed since C and letters are siblings in grid) */
+.wm-row-top {
+  grid-column: 1 / 3;
   grid-row: 1;
   display: flex;
   align-items: center;
+}
+
+/* Col 1, Row 1 — C arc, drops in LAST */
+.wm-c-wrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
   justify-content: center;
+  /* C animation: delay = after all 7 letters + divider */
+  animation: cDrop 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 2.55s;
+  opacity: 0;
 }
 
 .wm-c-svg {
@@ -62,8 +90,9 @@
   height: var(--c-w);
   overflow: visible;
   filter: drop-shadow(0 0 20px rgba(212, 168, 50, 0.5));
-  animation: cGlow 3.5s ease-in-out infinite;
-  /* Trim right whitespace so C sits flush against OLISEUM text */
+  animation: cDrop 0.65s cubic-bezier(0.22, 1, 0.36, 1) both,
+             cGlow 3.5s ease-in-out 3.2s infinite;
+  animation-delay: 2.55s, 3.2s;
   margin-right: calc(var(--c-w) * -0.16);
 }
 
@@ -76,10 +105,10 @@
   transition: transform 0.04s linear;
 }
 
-/* Col 2, Row 1 */
-.wm-oliseum {
-  grid-column: 2;
-  grid-row: 1;
+/* OLISEUM letter container */
+.wm-letters {
+  display: inline-flex;
+  align-items: center;
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: clamp(2.5rem, 6.5vw, 6rem);
@@ -90,28 +119,40 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   white-space: nowrap;
-  align-self: center;
 }
 
-/* Divider — full width, Row 2 */
+/* Each OLISEUM letter */
+.wm-letter {
+  display: inline-block;
+  opacity: 0;
+  animation: letterDrop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  /* stagger: 0.1s base + 0.14s per letter */
+  animation-delay: calc(0.1s + var(--letter-i) * 0.14s);
+}
+
+/* Divider — Row 2, expands after last letter */
 .wm-divider {
   grid-column: 1 / 3;
   grid-row: 2;
-  height: 1px;
+  height: 2px;
   background: linear-gradient(90deg, transparent, var(--accent-dim), transparent);
   margin: clamp(3px, 0.6vw, 8px) 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: lineExpand 0.45s ease-out both;
+  animation-delay: 1.2s; /* after M lands ~1.08s + gap */
 }
 
-/* Col 2, Row 3 — right-aligned under OLISEUM */
-.wm-talents {
+/* TALENTS letter container — Row 3 */
+.wm-talents-wrap {
   grid-column: 2;
   grid-row: 3;
+  display: inline-flex;
+  justify-content: flex-end;
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: clamp(0.9rem, 2.3vw, 2rem);
-  padding-left: 0;
   letter-spacing: 0.55em;
-  text-align: right;
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -119,7 +160,20 @@
   white-space: nowrap;
 }
 
-.hero-tagline {
+/* Each TALENTS letter — rises up after divider */
+.wm-talent-letter {
+  display: inline-block;
+  opacity: 0;
+  animation: letterDrop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  /* stagger: 1.55s base + 0.1s per letter */
+  animation-delay: calc(1.55s + var(--talent-i) * 0.10s);
+}
+
+/* tagline + CTAs fade up after everything */
+.wm-tagline {
+  opacity: 0;
+  animation: fadeUp 0.6s ease both;
+  animation-delay: 3.3s;
   font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -128,10 +182,19 @@
   margin-top: 0.5rem;
 }
 
-.hero-ctas {
+.wm-ctas {
+  opacity: 0;
+  animation: fadeUp 0.6s ease both;
+  animation-delay: 3.5s;
   display: flex;
   gap: 1rem;
   margin-top: 0.8rem;
+}
+
+.wm-scroll {
+  opacity: 0;
+  animation: fadeUp 0.6s ease both;
+  animation-delay: 3.7s;
 }
 
 /* ── Scroll hint ── */

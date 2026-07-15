@@ -22,12 +22,16 @@ export default function Hero() {
     }
     const animate = () => {
       const p = posRef.current
-      p.x += (p.tx - p.x) * 0.055
-      p.y += (p.ty - p.y) * 0.055
-      if (arc1Ref.current)
-        arc1Ref.current.style.transform = `rotate(${p.x * 12}deg) translateY(${p.y * 7}px)`
-      if (arc2Ref.current)
-        arc2Ref.current.style.transform = `rotate(${p.x * 22}deg) translateY(${p.y * 13}px)`
+      p.x += (p.tx - p.x) * 0.06
+      p.y += (p.ty - p.y) * 0.06
+
+      // Both inner arcs drift TOGETHER toward cursor — outer C is static anchor
+      const dx = p.x * 14
+      const dy = p.y * 14
+      if (arc1Ref.current) // middle C (r=74)
+        arc1Ref.current.style.transform = `translate(${dx}px, ${dy}px)`
+      if (arc2Ref.current) // inner C (r=62)
+        arc2Ref.current.style.transform = `translate(${dx}px, ${dy}px)`
       rafRef.current = requestAnimationFrame(animate)
     }
     hero.addEventListener('mousemove', onMove)
@@ -63,20 +67,25 @@ export default function Hero() {
                     <stop offset="100%" stopColor="#b8860b"/>
                   </linearGradient>
                 </defs>
+                {/* Outer C r=86 — STATIC ANCHOR, never moves */}
                 <path
-                  d="M 157.5,70.1 A 62,62 0 1,0 157.5,149.9"
-                  stroke="url(#cg)" strokeWidth="14" strokeLinecap="round" fill="none"
+                  d="M 170.8,49.2 A 86,86 0 1,0 170.8,170.8"
+                  stroke="url(#cg)" strokeWidth="7" strokeLinecap="round" fill="none" opacity="0.65"
                 />
-                <g ref={arc1Ref} style={{ transformOrigin: '110px 110px' }}>
+
+                {/* Middle C r=74 — floats toward cursor */}
+                <g ref={arc1Ref}>
                   <path
                     d="M 165.0,60.5 A 74,74 0 1,0 165.0,159.5"
                     stroke="url(#cg)" strokeWidth="10" strokeLinecap="round" fill="none" opacity="0.82"
                   />
                 </g>
-                <g ref={arc2Ref} style={{ transformOrigin: '110px 110px' }}>
+
+                {/* Inner C r=62 — floats toward cursor (same as middle, perfectly aligned) */}
+                <g ref={arc2Ref}>
                   <path
-                    d="M 170.8,49.2 A 86,86 0 1,0 170.8,170.8"
-                    stroke="url(#cg)" strokeWidth="7" strokeLinecap="round" fill="none" opacity="0.65"
+                    d="M 157.5,70.1 A 62,62 0 1,0 157.5,149.9"
+                    stroke="url(#cg)" strokeWidth="14" strokeLinecap="round" fill="none"
                   />
                 </g>
               </svg>

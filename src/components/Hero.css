@@ -105,7 +105,7 @@
   transition: transform 0.04s linear;
 }
 
-/* OLISEUM letter container */
+/* OLISEUM letter container — layout only, no text-fill here */
 .wm-letters {
   display: inline-flex;
   align-items: center;
@@ -114,18 +114,18 @@
   font-size: clamp(2.5rem, 6.5vw, 6rem);
   letter-spacing: 0.08em;
   line-height: 1;
-  background: linear-gradient(135deg, var(--text) 0%, rgba(245,239,224,0.75) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
   white-space: nowrap;
 }
 
-/* Each OLISEUM letter — hidden until .play added by React */
+/* Each OLISEUM letter — gradient on each span so opacity animation works */
 .wm-letter {
   display: inline-block;
   opacity: 0;
   transform: translateY(-55px);
+  background: linear-gradient(135deg, var(--text) 0%, rgba(245,239,224,0.75) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 .wm-letter.play {
   animation: letterDrop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -148,7 +148,7 @@
   animation-delay: 1.2s;
 }
 
-/* TALENTS letter container — Row 3 */
+/* TALENTS container — layout only */
 .wm-talents-wrap {
   grid-column: 2;
   grid-row: 3;
@@ -158,18 +158,18 @@
   font-weight: 800;
   font-size: clamp(0.9rem, 2.3vw, 2rem);
   letter-spacing: 0.55em;
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
   white-space: nowrap;
 }
 
-/* Each TALENTS letter */
+/* Each TALENTS letter — gradient on each span */
 .wm-talent-letter {
   display: inline-block;
   opacity: 0;
   transform: translateY(-55px);
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 .wm-talent-letter.play {
   animation: letterDrop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;

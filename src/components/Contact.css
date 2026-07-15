@@ -53,6 +53,7 @@
   color: var(--muted);
   text-decoration: none;
   transition: color 180ms ease;
+  margin-top: 0.75rem;
 }
 
 .contact-social:hover {

@@ -1,0 +1,150 @@
+.st-section {
+  height: 350vh; /* scroll space for the full animation */
+  position: relative;
+}
+
+/* Sticky inner container */
+.st-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* ── Layer 1: Card ── */
+.st-card {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    145deg,
+    #0f0b05 0%,
+    #1a1408 40%,
+    #0d0a04 100%
+  );
+  will-change: transform, opacity;
+  border-radius: 1.5rem;
+  /* starts below viewport so it slides in */
+  margin: 0;
+}
+
+.st-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 60% at 30% 40%, rgba(212,168,50,0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 75% 70%, rgba(240,212,112,0.10) 0%, transparent 60%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.st-card-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2rem;
+}
+
+.st-card-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  margin-bottom: 1.2rem;
+  display: block;
+}
+
+.st-card-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(3.5rem, 10vw, 9rem);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, var(--text) 0%, rgba(245,239,224,0.6) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Layer 2: Circle portal ── */
+.st-circle-layer {
+  position: absolute;
+  inset: 0;
+  will-change: clip-path;
+  /* clip-path driven by JS */
+}
+
+.st-circle-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 70% at 50% 45%, rgba(212,168,50,0.22) 0%, transparent 65%),
+    radial-gradient(ellipse 100% 80% at 50% 100%, rgba(240,212,112,0.12) 0%, transparent 55%),
+    linear-gradient(160deg, #0f0b05 0%, #070603 60%, #0a0803 100%);
+}
+
+/* Stage spotlight ring effect */
+.st-circle-bg::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(600px, 70vw);
+  height: min(600px, 70vw);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,168,50,0.14) 0%, transparent 70%);
+  pointer-events: none;
+  animation: spotlightPulse 3s ease-in-out infinite;
+}
+
+@keyframes spotlightPulse {
+  0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 1; }
+  50%       { transform: translate(-50%,-50%) scale(1.08); opacity: 0.75; }
+}
+
+.st-circle-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  max-width: 720px;
+  margin: 0 auto;
+  left: 50%;
+  transform: translateX(-50%);
+  will-change: opacity;
+  gap: 1rem;
+}
+
+.st-circle-content .gold-line {
+  margin: 0 auto 0.5rem;
+}
+
+.st-circle-content h2 {
+  font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+  line-height: 1.2;
+  max-width: 580px;
+}
+
+.st-circle-content p {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+.st-circle-content strong {
+  color: var(--accent-2);
+  font-weight: 600;
+}

@@ -2,6 +2,7 @@ import Cursor from './components/Cursor'
 import TopBar from './components/TopBar'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+import ScrollTransition from './components/ScrollTransition'
 import About from './components/About'
 import Expertise from './components/Expertise'
 import ExclusiveManagement from './components/ExclusiveManagement'
@@ -21,6 +22,7 @@ export default function App() {
       <TopBar />
       <Navbar />
       <Hero />
+      <ScrollTransition />
       <About />
       <Expertise />
       <ExclusiveManagement />

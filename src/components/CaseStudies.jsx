@@ -1,36 +1,62 @@
-import { useRef } from 'react'
+import { useState, useRef } from 'react'
 import useFadeIn from '../hooks/useFadeIn'
 import './CaseStudies.css'
 
-const CASES = [
+// Replace src with real photo paths once available e.g. '/events/event1.jpg'
+const EVENTS = [
   {
-    tag: 'Banking & Financial Services',
-    title: 'Delivered keynote speakers and celebrity hosts for leadership summits across Standard Chartered, ICICI Lombard, and ICICI Prudential.',
-    industry: 'Banking & Insurance',
-    type: 'Keynote Speakers + Celebrity Hosts',
-    outcome: 'Pan-India execution across multiple cities',
-    num: '01',
+    id: 1,
+    photo: null,
+    label: 'Leadership Summit',
+    client: 'Standard Chartered',
+    talent: 'Keynote Speaker',
+    size: 'large', // spans 2 columns
   },
   {
-    tag: 'Insurance & Investment',
-    title: 'Curated motivational speakers and entertainers for annual conferences and employee engagement events for Bajaj Finance, Bajaj Allianz, and Tata AIA.',
-    industry: 'Insurance & Finance',
-    type: 'Motivational Speakers + Corporate Entertainment',
-    outcome: 'Consistently re-engaged year on year',
-    num: '02',
+    id: 2,
+    photo: null,
+    label: 'Annual Conference',
+    client: 'ICICI Lombard',
+    talent: 'Celebrity Host',
+    size: 'small',
   },
   {
-    tag: 'Emerging Insurance',
-    title: 'Talent curation and end-to-end event consulting for Digit Insurance\'s large-format corporate events and brand activations.',
-    industry: 'InsurTech',
-    type: 'Event Consulting + Talent Procurement',
-    outcome: 'Seamless delivery from brief to curtain call',
-    num: '03',
+    id: 3,
+    photo: null,
+    label: 'Employee Engagement',
+    client: 'Bajaj Finance',
+    talent: 'Motivational Speaker',
+    size: 'small',
+  },
+  {
+    id: 4,
+    photo: null,
+    label: 'Awards Night',
+    client: 'Tata AIA',
+    talent: 'Live Performer',
+    size: 'small',
+  },
+  {
+    id: 5,
+    photo: null,
+    label: 'Brand Activation',
+    client: 'Digit Insurance',
+    talent: 'Corporate Entertainer',
+    size: 'large',
+  },
+  {
+    id: 6,
+    photo: null,
+    label: 'Strategy Forum',
+    client: 'Bajaj Allianz',
+    talent: 'Defence Speaker',
+    size: 'small',
   },
 ]
 
 export default function CaseStudies() {
   const ref = useRef()
+  const [hovered, setHovered] = useState(null)
   useFadeIn(ref)
 
   return (
@@ -39,26 +65,43 @@ export default function CaseStudies() {
         <div className="section-heading fade-up">
           <div className="gold-line" />
           <p className="eyebrow">Past events</p>
-          <h2>Trusted by India's leading brands.</h2>
-          <p>A selection of the companies we've delivered talent solutions for across banking, insurance, and financial services.</p>
+          <h2>Moments we have helped make extraordinary.</h2>
+          <p>A glimpse into the events, stages and celebrations we have been part of across India.</p>
         </div>
 
-        <div className="cases-list">
-          {CASES.map((c, i) => (
-            <article key={c.num} className={`case-card fade-up delay-${i + 1}`}>
-              <div className="case-num">{c.num}</div>
-              <div className="case-body">
-                <span className="case-tag">{c.tag}</span>
-                <h3>{c.title}</h3>
-                <div className="case-meta">
-                  <span><strong>Industry:</strong> {c.industry}</span>
-                  <span><strong>Talent:</strong> {c.type}</span>
-                  <span className="case-outcome">✦ {c.outcome}</span>
+        <div className="gallery-grid fade-up delay-1">
+          {EVENTS.map((ev) => (
+            <div
+              key={ev.id}
+              className={`gallery-item${ev.size === 'large' ? ' gallery-item--large' : ''}${hovered === ev.id ? ' hovered' : ''}`}
+              onMouseEnter={() => setHovered(ev.id)}
+              onMouseLeave={() => setHovered(null)}
+            >
+              {/* Photo or placeholder */}
+              {ev.photo ? (
+                <img src={ev.photo} alt={ev.label} className="gallery-photo" />
+              ) : (
+                <div className="gallery-placeholder">
+                  <span className="gallery-placeholder-icon">✦</span>
+                  <span className="gallery-placeholder-text">Photo coming soon</span>
+                </div>
+              )}
+
+              {/* Overlay on hover */}
+              <div className="gallery-overlay">
+                <div className="gallery-overlay-content">
+                  <span className="gallery-talent-tag">{ev.talent}</span>
+                  <h3>{ev.label}</h3>
+                  <p>{ev.client}</p>
                 </div>
               </div>
-            </article>
+            </div>
           ))}
         </div>
+
+        <p className="gallery-note fade-up delay-3">
+          Photos from our events will be added here. Reach out to <a href="mailto:info@coliseumtalents.in">info@coliseumtalents.in</a> to learn more about past events.
+        </p>
       </div>
     </section>
   )

@@ -84,30 +84,17 @@
 .st-circle-bg {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse 70% 70% at 50% 45%, rgba(212,168,50,0.22) 0%, transparent 65%),
-    radial-gradient(ellipse 100% 80% at 50% 100%, rgba(240,212,112,0.12) 0%, transparent 55%),
-    linear-gradient(160deg, #0f0b05 0%, #070603 60%, #0a0803 100%);
+  background-image: url('/About us background.jpg');
+  background-size: cover;
+  background-position: center 30%;
 }
 
-/* Stage spotlight ring effect */
 .st-circle-bg::after {
   content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(600px, 70vw);
-  height: min(600px, 70vw);
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(212,168,50,0.14) 0%, transparent 70%);
+  inset: 0;
+  background: rgba(7, 6, 3, 0.55);
   pointer-events: none;
-  animation: spotlightPulse 3s ease-in-out infinite;
-}
-
-@keyframes spotlightPulse {
-  0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 1; }
-  50%       { transform: translate(-50%,-50%) scale(1.08); opacity: 0.75; }
 }
 
 .st-circle-content {

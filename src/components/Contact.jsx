@@ -2,20 +2,39 @@ import { useState, useRef } from 'react'
 import useFadeIn from '../hooks/useFadeIn'
 import './Contact.css'
 
+const FORMSPREE_URL = 'https://formspree.io/f/meeyqbwa'
+
 export default function Contact() {
   const ref = useRef()
   useFadeIn(ref)
 
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }))
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setSubmitted(true)
-    // To wire up: POST to your backend or use a service like Formspree
-    // e.g. fetch('https://formspree.io/f/YOUR_ID', { method: 'POST', body: JSON.stringify(form) })
+    setLoading(true)
+    setError('')
+    try {
+      const res = await fetch(FORMSPREE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ ...form, _replyto: form.email }),
+      })
+      if (res.ok) {
+        setSubmitted(true)
+      } else {
+        setError('Something went wrong. Please email info@coliseumtalents.in directly.')
+      }
+    } catch {
+      setError('Network error. Please email info@coliseumtalents.in directly.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -30,7 +49,10 @@ export default function Contact() {
             info@coliseumtalents.in
           </a>
           <a href="https://www.instagram.com/coliseum_talents" target="_blank" rel="noopener noreferrer" className="contact-social">
-            <span>📷</span> @coliseum_talents
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+            </svg>
+            @coliseum_talents
           </a>
         </div>
 
@@ -88,9 +110,10 @@ export default function Contact() {
                   value={form.message} onChange={handleChange} required
                 />
               </div>
-              <button type="submit" className="btn btn-primary form-submit">
-                Send Enquiry
+              <button type="submit" className="btn btn-primary form-submit" disabled={loading}>
+                {loading ? 'Sending…' : 'Send Enquiry'}
               </button>
+              {error && <p className="form-error">{error}</p>}
             </form>
           )}
         </div>

@@ -122,6 +122,18 @@
   margin-top: 0.5rem;
 }
 
+.form-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.form-error {
+  font-size: 0.82rem;
+  color: #e07070;
+  margin-top: 0.25rem;
+}
+
 /* ── Success state ── */
 .form-success {
   display: flex;

@@ -31,7 +31,7 @@ export default function ScrollTransition() {
 
   // ── Phase 2: Circle portal opens (0.50 → 1.0) ──
   const circleT   = Math.max(0, Math.min(1, (prog - 0.50) / 0.50))
-  const circleR   = lerp(3, 155, circleT)   // % radius
+  const circleR   = lerp(0, 155, circleT)   // starts at 0% — invisible until phase 2
   const contentOp = lerp(0, 1, Math.max(0, Math.min(1, (prog - 0.68) / 0.16)))
 
   return (

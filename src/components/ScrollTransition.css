@@ -47,7 +47,7 @@
   position: relative;
   z-index: 1;
   text-align: center;
-  padding: 2rem;
+  padding: 2rem 2rem 7rem; /* 7rem bottom clears the bottom navbar */
 }
 
 .st-card-eyebrow {

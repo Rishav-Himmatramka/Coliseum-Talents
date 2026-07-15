@@ -1,15 +1,22 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './Hero.css'
 
 const OLISEUM = ['O','L','I','S','E','U','M']
 const TALENTS = ['T','A','L','E','N','T','S']
 
 export default function Hero() {
+  const [play, setPlay] = useState(false)
   const arc1Ref = useRef()
   const arc2Ref = useRef()
   const heroRef = useRef()
   const rafRef = useRef()
   const posRef = useRef({ x: 0, y: 0, tx: 0, ty: 0 })
+
+  // Trigger animation after mount so it always plays fresh
+  useEffect(() => {
+    const t = requestAnimationFrame(() => setPlay(true))
+    return () => cancelAnimationFrame(t)
+  }, [])
 
   // Cursor-following arc parallax
   useEffect(() => {
@@ -24,13 +31,11 @@ export default function Hero() {
       const p = posRef.current
       p.x += (p.tx - p.x) * 0.06
       p.y += (p.ty - p.y) * 0.06
-
-      // Both inner arcs drift TOGETHER toward cursor — outer C is static anchor
       const dx = p.x * 14
       const dy = p.y * 14
-      if (arc1Ref.current) // middle C (r=74)
+      if (arc1Ref.current)
         arc1Ref.current.style.transform = `translate(${dx}px, ${dy}px)`
-      if (arc2Ref.current) // inner C (r=62)
+      if (arc2Ref.current)
         arc2Ref.current.style.transform = `translate(${dx}px, ${dy}px)`
       rafRef.current = requestAnimationFrame(animate)
     }
@@ -42,6 +47,22 @@ export default function Hero() {
     }
   }, [])
 
+  /*
+   * Arc geometry (viewBox 220x220, center 110,110):
+   *
+   * Outer C  r=94  gap ±48°  stroke=6   (static anchor)
+   *   cos48=0.669 sin48=0.743
+   *   start(172.9,40.2) end(172.9,179.8)
+   *
+   * Middle C r=74  gap ±42°  stroke=10  (floats with cursor)
+   *   cos42=0.743 sin42=0.669
+   *   start(165.0,60.5) end(165.0,159.5)
+   *
+   * Inner C  r=56  gap ±38°  stroke=15  (floats with cursor, same as middle)
+   *   cos38=0.788 sin38=0.616
+   *   start(154.1,75.5) end(154.1,144.5)
+   */
+
   return (
     <section className="hero" id="top" ref={heroRef}>
       <div className="hero-bg" />
@@ -49,11 +70,9 @@ export default function Hero() {
       <div className="hero-center">
         <div className="hero-wordmark">
 
-          {/* Row 1: C arc (last, dramatic) + O L I S E U M (staggered drop) */}
           <div className="wm-row-top">
-
-            {/* C arc — drops in LAST after all letters */}
-            <div className="wm-c-wrap wm-c-drop">
+            {/* C arc — drops in LAST */}
+            <div className={`wm-c-wrap${play ? ' play' : ''}`}>
               <svg
                 className="wm-c-svg"
                 viewBox="0 0 220 220"
@@ -67,10 +86,11 @@ export default function Hero() {
                     <stop offset="100%" stopColor="#b8860b"/>
                   </linearGradient>
                 </defs>
-                {/* Outer C r=86 — STATIC ANCHOR, never moves */}
+
+                {/* Outer C r=94 — STATIC ANCHOR */}
                 <path
-                  d="M 170.8,49.2 A 86,86 0 1,0 170.8,170.8"
-                  stroke="url(#cg)" strokeWidth="7" strokeLinecap="round" fill="none" opacity="0.65"
+                  d="M 172.9,40.2 A 94,94 0 1,0 172.9,179.8"
+                  stroke="url(#cg)" strokeWidth="6" strokeLinecap="round" fill="none" opacity="0.60"
                 />
 
                 {/* Middle C r=74 — floats toward cursor */}
@@ -81,11 +101,11 @@ export default function Hero() {
                   />
                 </g>
 
-                {/* Inner C r=62 — floats toward cursor (same as middle, perfectly aligned) */}
+                {/* Inner C r=56 — floats with cursor (same as middle) */}
                 <g ref={arc2Ref}>
                   <path
-                    d="M 157.5,70.1 A 62,62 0 1,0 157.5,149.9"
-                    stroke="url(#cg)" strokeWidth="14" strokeLinecap="round" fill="none"
+                    d="M 154.1,75.5 A 56,56 0 1,0 154.1,144.5"
+                    stroke="url(#cg)" strokeWidth="15" strokeLinecap="round" fill="none"
                   />
                 </g>
               </svg>
@@ -96,7 +116,7 @@ export default function Hero() {
               {OLISEUM.map((letter, i) => (
                 <span
                   key={i}
-                  className="wm-letter"
+                  className={`wm-letter${play ? ' play' : ''}`}
                   style={{ '--letter-i': i }}
                 >
                   {letter}
@@ -105,15 +125,15 @@ export default function Hero() {
             </span>
           </div>
 
-          {/* Divider line — extends after letters finish */}
-          <div className="wm-divider" />
+          {/* Divider line */}
+          <div className={`wm-divider${play ? ' play' : ''}`} />
 
-          {/* T A L E N T S — each letter rises in after divider */}
+          {/* T A L E N T S */}
           <span className="wm-talents-wrap" aria-label="TALENTS">
             {TALENTS.map((letter, i) => (
               <span
                 key={i}
-                className="wm-talent-letter"
+                className={`wm-talent-letter${play ? ' play' : ''}`}
                 style={{ '--talent-i': i }}
               >
                 {letter}
@@ -123,16 +143,16 @@ export default function Hero() {
 
         </div>
 
-        <p className="hero-tagline wm-tagline">
+        <p className={`hero-tagline wm-tagline${play ? ' play' : ''}`}>
           Boutique Talent Management&nbsp;&middot;&nbsp;Consulting&nbsp;&middot;&nbsp;India
         </p>
-        <div className="hero-ctas wm-ctas">
+        <div className={`hero-ctas wm-ctas${play ? ' play' : ''}`}>
           <a href="#about" className="btn btn-primary">Explore</a>
           <a href="#contact" className="btn btn-secondary">Book an Artist</a>
         </div>
       </div>
 
-      <div className="scroll-hint wm-scroll">
+      <div className={`scroll-hint wm-scroll${play ? ' play' : ''}`}>
         <span>Scroll to Explore</span>
         <div className="scroll-mouse">
           <div className="scroll-wheel" />

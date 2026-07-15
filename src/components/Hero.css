@@ -73,26 +73,26 @@
   align-items: center;
 }
 
-/* Col 1, Row 1 — C arc, drops in LAST */
+/* C wrap — hidden, drops in last via .play */
 .wm-c-wrap {
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* C animation: delay = after all 7 letters + divider */
+  opacity: 0;
+}
+.wm-c-wrap.play {
   animation: cDrop 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: 2.55s;
-  opacity: 0;
+}
+.wm-c-wrap.play .wm-c-svg {
+  animation: cGlow 3.5s ease-in-out 3.2s infinite;
 }
 
 .wm-c-svg {
   width: var(--c-w);
   height: var(--c-w);
   overflow: visible;
-  filter: drop-shadow(0 0 20px rgba(212, 168, 50, 0.5));
-  animation: cDrop 0.65s cubic-bezier(0.22, 1, 0.36, 1) both,
-             cGlow 3.5s ease-in-out 3.2s infinite;
-  animation-delay: 2.55s, 3.2s;
   margin-right: calc(var(--c-w) * -0.16);
 }
 
@@ -121,16 +121,18 @@
   white-space: nowrap;
 }
 
-/* Each OLISEUM letter */
+/* Each OLISEUM letter — hidden until .play added by React */
 .wm-letter {
   display: inline-block;
   opacity: 0;
+  transform: translateY(-55px);
+}
+.wm-letter.play {
   animation: letterDrop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-  /* stagger: 0.1s base + 0.14s per letter */
   animation-delay: calc(0.1s + var(--letter-i) * 0.14s);
 }
 
-/* Divider — Row 2, expands after last letter */
+/* Divider — Row 2, triggered by .play */
 .wm-divider {
   grid-column: 1 / 3;
   grid-row: 2;
@@ -139,8 +141,11 @@
   margin: clamp(3px, 0.6vw, 8px) 0;
   transform: scaleX(0);
   transform-origin: left;
+  opacity: 0;
+}
+.wm-divider.play {
   animation: lineExpand 0.45s ease-out both;
-  animation-delay: 1.2s; /* after M lands ~1.08s + gap */
+  animation-delay: 1.2s;
 }
 
 /* TALENTS letter container — Row 3 */
@@ -160,18 +165,23 @@
   white-space: nowrap;
 }
 
-/* Each TALENTS letter — rises up after divider */
+/* Each TALENTS letter */
 .wm-talent-letter {
   display: inline-block;
   opacity: 0;
+  transform: translateY(-55px);
+}
+.wm-talent-letter.play {
   animation: letterDrop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
-  /* stagger: 1.55s base + 0.1s per letter */
   animation-delay: calc(1.55s + var(--talent-i) * 0.10s);
 }
 
 /* tagline + CTAs fade up after everything */
 .wm-tagline {
   opacity: 0;
+  transform: translateY(20px);
+}
+.wm-tagline.play {
   animation: fadeUp 0.6s ease both;
   animation-delay: 3.3s;
   font-size: 0.82rem;
@@ -184,6 +194,9 @@
 
 .wm-ctas {
   opacity: 0;
+  transform: translateY(20px);
+}
+.wm-ctas.play {
   animation: fadeUp 0.6s ease both;
   animation-delay: 3.5s;
   display: flex;
@@ -193,6 +206,9 @@
 
 .wm-scroll {
   opacity: 0;
+  transform: translateY(20px);
+}
+.wm-scroll.play {
   animation: fadeUp 0.6s ease both;
   animation-delay: 3.7s;
 }
